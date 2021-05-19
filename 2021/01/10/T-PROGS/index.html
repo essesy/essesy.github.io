@@ -260,7 +260,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     大概需要
-                    28
+                    27
                      分钟
                   </span>
                 
@@ -302,30 +302,81 @@
 <hr>
 <h1 id="理论与方法"><a href="#理论与方法" class="headerlink" title="理论与方法"></a>理论与方法</h1><h2 id="地统计方法简单介绍"><a href="#地统计方法简单介绍" class="headerlink" title="地统计方法简单介绍"></a>地统计方法简单介绍</h2><p>地质统计学的核心以及基础是”变差(变异)函数”:</p>
 <blockquote>
-<p>空间中一点$x$与其相邻一点$x+h$的某一相关变量$Z(x)$方差的差值,称为$Z(x)$在$x$方向上的变异函数,记为$\gamma(x,h)$:<br>$$<br>\gamma(x, h)=\frac{1}{2} \operatorname{Var}[Z(x)-Z(x+h)]<br>$$</p>
-</blockquote>
+<p>空间中一点$x$与其相邻一点$x+h$的某一相关变量$Z(x)$方差的差值,称为$Z(x)$在$x$方向上的变异函数,记为$\gamma(x,h)$:  </p>
+<script type="math/tex; mode=display">
+\gamma(x, h)=\frac{1}{2} \operatorname{Var}[Z(x)-Z(x+h)]</script></blockquote>
 <p>上式是在以为情况下成立的,高维情况都是以一维情况为基础,在二阶平稳场(简单来说就是$\gamma(x,h)$只与$h$有关,任何一点相同距离内的变差函数的均值都是一样的)中有:</p>
 <blockquote>
-<p>$$<br>\gamma(h)=\frac{1}{2} E\left[(Z(x)-Z(x+h))^{2}\right]-\frac{1}{2}(E[Z(x)-Z(x+h)])^{2}<br>$$</p>
-</blockquote>
+<script type="math/tex; mode=display">
+\gamma(h)=\frac{1}{2} E\left[(Z(x)-Z(x+h))^{2}\right]-\frac{1}{2}(E[Z(x)-Z(x+h)])^{2}</script></blockquote>
 <p>如此一来,变异函数就被简化为一个单变量函数,并且在$x$方向上任取两点$x_i,x_i+h$对应的变异函数都是以$h$为自变量的随即变量的一个统计样本,其所有取值构成了一次统计。</p>
-<p>对于<strong>克里金方法(Kriging Method)</strong>来说,空间中一点处某一参数$z$的估计值为:<br>$$<br>\hat z_o = \sum_{i=1}^n\lambda_iz_i<br>$$<br>其中$\hat{z_o}$是点处的估计值，即$z_o=z(x_o,y_o)$,$λ<em>i$是权重系数。克里金方法是用空间上所有已知点的数据加权求和来估计未知点的值。此处的权重是能够满足点 $(x_o,y_o)$处的估计值$\hat{z_o}$与真实值$z_o$的差最小的一套最优系数，即<br>$$<br>\min</em>{\lambda_i} Var(\hat{z_o}-z_o)<br>$$<br>同时满足无偏估计的条件:<br>$$<br>E(\hat{z_o}-z_o)=0<br>$$<br>求解简化（拉格朗日乘数法）之后可以得到下面的一组控制方程:<br>$$<br>\left{<br>    \begin{aligned}<br>        \sum_{i=1}^n\lambda_i\gamma((x_i,y_i),(x_j,y_j))+\mu &amp;=\overline\gamma((x_o,y_o),V) \<br>        \sum_{i=1}^n\lambda_i &amp;= 1<br>    \end{aligned}<br>\right.<br>$$<br>在上式中唯一未知的便是我们先前所提到的变差函数（或称变异函数,半方差函数；此处的$\overline\gamma(x_o,V)$表示以$(x_o,y_o)$为中心的一个空间范围$V$内所有的变差函数的均值）。事实上，根据地理学第一定律：距离越近空间相关性越强，我们可以简单地做出假设：</p>
+<p>对于<strong>克里金方法(Kriging Method)</strong>来说,空间中一点处某一参数$z$的估计值为:</p>
+<script type="math/tex; mode=display">
+\hat z_o = \sum_{i=1}^n\lambda_iz_i</script><p>其中$\hat{z_o}$是点处的估计值，即$z_o=z(x_o,y_o)$,$λ_i$是权重系数。克里金方法是用空间上所有已知点的数据加权求和来估计未知点的值。此处的权重是能够满足点 $(x_o,y_o)$处的估计值$\hat{z_o}$与真实值$z_o$的差最小的一套最优系数，即</p>
+<script type="math/tex; mode=display">
+\min_{\lambda_i} Var(\hat{z_o}-z_o)</script><p>同时满足无偏估计的条件:</p>
+<script type="math/tex; mode=display">
+E(\hat{z_o}-z_o)=0</script><p>求解简化（拉格朗日乘数法）之后可以得到下面的一组控制方程:</p>
+<script type="math/tex; mode=display">
+\left\{
+    \begin{aligned}
+        \sum_{i=1}^n\lambda_i\gamma((x_i,y_i),(x_j,y_j))+\mu &=\overline\gamma((x_o,y_o),V) \\
+        \sum_{i=1}^n\lambda_i &= 1
+    \end{aligned}
+\right.</script><p>在上式中唯一未知的便是我们先前所提到的变差函数（或称变异函数,半方差函数；此处的$\overline\gamma(x_o,V)$表示以$(x_o,y_o)$为中心的一个空间范围$V$内所有的变差函数的均值）。事实上，根据地理学第一定律：距离越近空间相关性越强，我们可以简单地做出假设：</p>
 <blockquote>
 <p>两点的变差函数与其距离之间存在某种函数关系，这种函数关系可以是线性、二次函数、指数、对数关系。</p>
 </blockquote>
 <p>通过对数据集进行分析，从而寻找到一个最优的拟合曲线拟合距离$d$与变差函数$\gamma$的关系，得到函数关系式$\gamma = \gamma(d)$那么对于任意两点$(x_i,y_i)$，$(x_j,y_j)$，先计算他们之间的距离$d_{ij}$然后根据得到的函数关系就可以得到这两点的变差函数，进一步的解决空间中一点的参数估计问题。</p>
 <hr>
-<h2 id="马尔科夫链与转移概率地统计"><a href="#马尔科夫链与转移概率地统计" class="headerlink" title="马尔科夫链与转移概率地统计"></a>马尔科夫链与转移概率地统计</h2><p>转移概率是马尔科夫链的一个重要概念，马尔科夫过程假设事物后一时刻的状态至于前一时刻的状态相关。换句话说：今天的事情由昨天完全决定，明天的事情由今天完全决定，并且与此前的每一天都没有直接关系。在此基础上所谓转移概率就是从一种状态转变为另一种状态的概率，在地统计学中有如下的表达：<br>$$<br>t_{jk}(h) = Pr(k\ occurs\ at\ (x+h)\ |\ j\ occurs\ at\ x)<br>$$<br>它表示已知$x$处的岩性为$j$，$(x+h)$处岩性为$k$的概率。</p>
-<p>利用指示地统计中指示变量的形式（$I_j(x)$）我们可以将变差函数转为下面的形式（协变差函数）：<br>$$<br>\begin{aligned}<br>    \gamma_{jk}(h) &amp;= \frac{1}{2}E{[I_j(x)-I_j(x+h)][I_k(x)-I_k(x+h)]} \<br>    I_j(x) &amp;=\left{<br>        \begin{aligned}<br>            1\ &amp;,if\ occurs\ at\ x\<br>            0\ &amp;,otherwise<br>        \end{aligned}<br>    \right.<br>\end{aligned}</p>
-<p>$$<br>同时，将转移概率用指示变量表示：<br>$$<br>t_{jk}(h) = \frac{E[(I_j(x)I_k(x+h))]}{E[I_j(x)]}<br>$$</p>
-<blockquote>
+<h2 id="马尔科夫链与转移概率地统计"><a href="#马尔科夫链与转移概率地统计" class="headerlink" title="马尔科夫链与转移概率地统计"></a>马尔科夫链与转移概率地统计</h2><p>转移概率是马尔科夫链的一个重要概念，马尔科夫过程假设事物后一时刻的状态至于前一时刻的状态相关。换句话说：今天的事情由昨天完全决定，明天的事情由今天完全决定，并且与此前的每一天都没有直接关系。在此基础上所谓转移概率就是从一种状态转变为另一种状态的概率，在地统计学中有如下的表达：</p>
+<script type="math/tex; mode=display">
+t_{jk}(h) = Pr(k\ occurs\ at\ (x+h)\ |\ j\ occurs\ at\ x)</script><p>它表示已知$x$处的岩性为$j$，$(x+h)$处岩性为$k$的概率。</p>
+<p>利用指示地统计中指示变量的形式（$I_j(x)$）我们可以将变差函数转为下面的形式（协变差函数）：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \gamma_{jk}(h) &= \frac{1}{2}E{[I_j(x)-I_j(x+h)][I_k(x)-I_k(x+h)]} \\
+    I_j(x) &=\left\{
+        \begin{aligned}
+            1\ &,if\ occurs\ at\ x\\
+            0\ &,otherwise
+        \end{aligned}
+    \right.
+\end{aligned}</script><p>同时，将转移概率用指示变量表示：</p>
+<script type="math/tex; mode=display">
+t_{jk}(h) = \frac{E[(I_j(x)I_k(x+h))]}{E[I_j(x)]}</script><blockquote>
 <p>PS:这里使用均值是一个统计过程，实际过程过我们不可能知道概率的实际大小，所以利用统计得到的两个事件各自在多个统计点发生的平均数之比来代替概率之比。事实上，在指示地统计中均值和概率是等价的。</p>
 </blockquote>
 <p>紧接着,我们可以将转移概率和所谓协变差函数结合起来,找出它们的关系式:</p>
-<p>作如下的假设:<br>$$<br>\begin{aligned}<br>    P_j(x) &amp;= E[E[I_j(x)]]\<br>    P_{jk}(h) &amp;= E[E[I_j(x)I_k(x+h)]]<br>\end{aligned}</p>
-<p>$$<br>特别的,我们有:$P_{jk}(0) = P_j(x)P_k(x)$，如此一来，协变差函数以及转移概率就变成了如下的形式：<br>$$<br>\begin{aligned}<br>    \gamma_{jk}(h) &amp;= P_{jk}(0)-\frac{1}{2}(P_{jk}(h)+P_{jk}(-h))\<br>    t_{jk}(h) &amp;= \frac{P_{jk}(h)}{P_j(x)}\<br>    \Rightarrow\ \ \ \gamma_{jk}(h) &amp;= P_j(x){t_{jk}(0)-\frac{1}{2}[t_{jk}(h)+t_{jk}(-h)]}<br>\end{aligned}<br>$$</p>
-<p>最后，结合克里金方法与转移概率，用转移概率矩阵表达上述普通克里金方程：<br>$$<br>\left[\begin{array}{cccc}<br>t_{i j}\left(x_{1}-x_{1}\right) &amp; \cdots &amp; t_{i j}\left(x_{N}-x_{1}\right) &amp; 1 \<br>\vdots &amp; \ddots &amp; \vdots &amp; \vdots \<br>t_{i j}\left(x_{1}-x_{N}\right) &amp; \cdots &amp; t_{i j}\left(x_{N}-x_{N}\right) &amp; 1 \<br>1 &amp; \cdots &amp; 1 &amp; 0<br>\end{array}\right]\left[\begin{array}{c}<br>\lambda_{j, 1} \<br>\vdots \<br>\lambda_{j, n} \<br>\mu<br>\end{array}\right]=\left[\begin{array}{c}<br>t_{i j}\left(x-x_{1}\right) \<br>\vdots \<br>t_{i j}\left(x-x_{N}\right) \<br>1<br>\end{array}\right]<br>$$</p>
-<p>这样，通过转移概率利用克里金进行空间插值就得到了实现。</p>
+<p>作如下的假设:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    P_j(x) &= E[E[I_j(x)]]\\
+    P_{jk}(h) &= E[E[I_j(x)I_k(x+h)]]
+\end{aligned}</script><p>特别的,我们有:$P_{jk}(0) = P_j(x)P_k(x)$，如此一来，协变差函数以及转移概率就变成了如下的形式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    \gamma_{jk}(h) &= P_{jk}(0)-\frac{1}{2}(P_{jk}(h)+P_{jk}(-h))\\
+    t_{jk}(h) &= \frac{P_{jk}(h)}{P_j(x)}\\
+    \Rightarrow\ \ \ \gamma_{jk}(h) &= P_j(x){t_{jk}(0)-\frac{1}{2}[t_{jk}(h)+t_{jk}(-h)]}
+\end{aligned}</script><p>最后，结合克里金方法与转移概率，用转移概率矩阵表达上述普通克里金方程：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cccc}
+t_{i j}\left(x_{1}-x_{1}\right) & \cdots & t_{i j}\left(x_{N}-x_{1}\right) & 1 \\
+\vdots & \ddots & \vdots & \vdots \\
+t_{i j}\left(x_{1}-x_{N}\right) & \cdots & t_{i j}\left(x_{N}-x_{N}\right) & 1 \\
+1 & \cdots & 1 & 0
+\end{array}\right]\left[\begin{array}{c}
+\lambda_{j, 1} \\
+\vdots \\
+\lambda_{j, n} \\
+\mu
+\end{array}\right]=\left[\begin{array}{c}
+t_{i j}\left(x-x_{1}\right) \\
+\vdots \\
+t_{i j}\left(x-x_{N}\right) \\
+1
+\end{array}\right]</script><p>这样，通过转移概率利用克里金进行空间插值就得到了实现。</p>
 <hr>
 <div class="note note-primary">
             <p>参考文献:<br>克里金(Kriging)插值的原理与公式推导:<a href="https://xg1990.com/blog/archives/222" target="_blank" rel="noopener">https://xg1990.com/blog/archives/222</a></p><p>董英, 基于随机水文地质结构的华北平原地下水流模拟研究, 2006, 中国地质大学（北京）. </p>

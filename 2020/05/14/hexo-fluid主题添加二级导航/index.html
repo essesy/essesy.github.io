@@ -294,16 +294,13 @@
             
             <article class="markdown-body">
               <p><img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/6418A1E7501871AF561B89A22AB13D3F.png" srcset="/img/loading.gif" alt="6418A1E7501871AF561B89A22AB13D3F"></p>
-<hr>
-<hr>
-<div class="note note-info">
+<h2 id="—"><a href="#—" class="headerlink" title="—-"></a>—-</h2><div class="note note-info">
             <p>使用hexo博客的fluid主题已经有一段时间了，因为打算写的内容很杂，所从很早开始就想要做一个二级导航出来，这段时间一直在折腾这个东西！前几天给网站加上了豆瓣的📕书评和🎦电影栏目，发现这样要是以后再加点什么东西导航栏就放不下了。所以痛定思痛决定开始弄二级导航（<del>鬼知道我为了做这个东西连即将要到来的考试和难到爆炸的课程设计都不管了</del>）</p>
           </div>
-
-
 <blockquote>
 <div class="mybox"><div>hahaha真的吗😦</div></div>
 <div class="otherbox"><div>嗯，嗯~ o(*￣▽￣*)o</div></div>
+
 </blockquote>
 <h1 id="开始搞事情😄O-∩-∩-O"><a href="#开始搞事情😄O-∩-∩-O" class="headerlink" title="开始搞事情😄O(∩_∩)O"></a>开始搞事情😄O(∩_∩)O</h1><p>emmmmm，首先<del>其实差不多只有这一步啦</del>我们要做的就是更改文章生成的模板，fluid主题的话就打开主题目录下的<code>layout</code>文件夹中的<code>nav.ejs</code>文件，修改为如下的样式（其中注释的位置就是修改的主要位置，也是导航栏内容所在，你也可以按照自己的想法修改这个地方的内容）：</p>
 <pre><code>&lt;nav id=&quot;navbar&quot; class=&quot;navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar&quot;&gt;
@@ -394,7 +391,8 @@ ul {
 
 li.nav-item {
     padding: 0 15px;
-}</code></pre><p>这样我们的基本的配置就算是完成了，接下来就是二级菜单的写法！</p>
+}
+</code></pre><p>这样我们的基本的配置就算是完成了，接下来就是二级菜单的写法！</p>
 <h1 id="配置文件中二级菜单的写法"><a href="#配置文件中二级菜单的写法" class="headerlink" title="配置文件中二级菜单的写法"></a>配置文件中二级菜单的写法</h1><p>打开主题配置文件<code>fluid_config.yml</code>，在菜单部分以“_分类_”菜单为例我们做如下的改动<br>submenu指定二级菜单，和一级菜单类似，<strong>最后用[]括起来！！！</strong></p>
 <pre><code>navbar:
   blog_title:  # 导航栏左侧的标题，为空则按 hexo config.title 显示
@@ -408,12 +406,12 @@ li.nav-item {
     ]}
     - { key: &#39;tag&#39;, link: &#39;/tags/&#39;, icon: &#39;iconfont icon-tags-fill&#39; }
     - { key: &#39;about&#39;, link: &#39;/about/&#39;, icon: &#39;iconfont icon-user-fill&#39; }
-    #- { key: &#39;links&#39;, link: &#39;/links/&#39;, icon: &#39;iconfont icon-link-fill&#39; } # 友链页，把前面#去掉即可展示</code></pre><p>这样我们就完成了一个主题的二级导航自定义，当然这样其实还是不太好看，可以自己用css进行调整。此外，针对不同的主题配置<code>config.yml</code>的不同写法情况，其实都是大同小异的，<a href="https://www.hojun.cn/2019/01/08/ck8irvkwx009qdwtu8ejla2mg/" target="_blank" rel="noopener">可以点我去往某个大佬的空间看看，以作参考！！！&lt;(￣︶￣)↗[GO!]</a>。</p>
+    #- { key: &#39;links&#39;, link: &#39;/links/&#39;, icon: &#39;iconfont icon-link-fill&#39; } # 友链页，把前面#去掉即可展示
+</code></pre><p>这样我们就完成了一个主题的二级导航自定义，当然这样其实还是不太好看，可以自己用css进行调整。此外，针对不同的主题配置<code>config.yml</code>的不同写法情况，其实都是大同小异的，<a href="https://www.hojun.cn/2019/01/08/ck8irvkwx009qdwtu8ejla2mg/" target="_blank" rel="noopener">可以点我去往某个大佬的空间看看，以作参考！！！&lt;(￣︶￣)↗[GO!]</a>。</p>
 <p>以我的网站为例最终实现就是这样的效果：<br><img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/20200514170113.png" srcset="/img/loading.gif" alt="20200514170113"><br><img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/20200514170146.png" srcset="/img/loading.gif" alt="20200514170146"></p>
-<p>哈哈哈哈，我觉得还是可以的！！！😁😁😁</p>
-<div class="note note-success">
+<p>哈哈哈哈，我觉得还是可以的！！！😁😁😁<br><div class="note note-success">
             <p>参考：</p><p>yaml基本语法及实现Hexo二级导航栏功能<a href="https://www.hojun.cn/2019/01/08/ck8irvkwx009qdwtu8ejla2mg/" target="_blank" rel="noopener">https://www.hojun.cn/2019/01/08/ck8irvkwx009qdwtu8ejla2mg/</a></p><p>为博客网站增加一个二级目录菜单<a href="https://sunhwee.com/posts/65d7181d.html" target="_blank" rel="noopener">https://sunhwee.com/posts/65d7181d.html</a></p><p>如何通过html和css完成下拉菜单的制作？<a href="https://www.zhihu.com/question/36356940" target="_blank" rel="noopener">https://www.zhihu.com/question/36356940</a></p><p>and so on ……</p>
-          </div>
+          </div></p>
 
             </article>
             <hr>

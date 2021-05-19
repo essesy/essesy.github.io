@@ -250,7 +250,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    一共3.3k 字
+                    一共3.2k 字
                   </span>
                 
 
@@ -260,7 +260,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     大概需要
-                    42
+                    40
                      分钟
                   </span>
                 
@@ -289,69 +289,154 @@
           <div class="post-content mx-auto" id="post">
             
               <p class="note note-warning">
-                更新于：星期三, 五月 19日 2021, 2:16 凌晨
+                更新于：星期三, 五月 19日 2021, 6:00 晚上
               </p>
             
             <article class="markdown-body">
               <div class="note note-primary">
             <p>在T-PROGS中提供了五种方法方便我们构建马尔科夫链的转移概率矩阵，这五种方法各自适用于不同的情况，并且在操作上有着比较大的区别，现在通过对T-PROGS操作手册的翻译来大致介绍一下每一种方法的情况。</p>
           </div>
-
 <h1 id="T-PROGS中各种方法的具体描述"><a href="#T-PROGS中各种方法的具体描述" class="headerlink" title="T-PROGS中各种方法的具体描述"></a>T-PROGS中各种方法的具体描述</h1><hr>
-<h2 id="转移率方法"><a href="#转移率方法" class="headerlink" title="转移率方法"></a>转移率方法</h2><p>所谓转移率就是计算连续转移概率矩阵的方程所提到的转移率矩阵$R_\phi$的输入元素。转移率可以被解释为转移概率在滞后距离为零时的斜率。因此，一个建立转移率矩阵的方法需要估计转移概率数据的斜率：$\frac{\partial t_{jk}(h \rightarrow 0)}{\partial h_\phi}$ ，对于一个四分类的例子来说（debris flow, floodplain, levee, channel）转移率矩阵可以被建立为:<br>$$<br>\mathbf{R}_{z}=\left[\begin{array}{cccc}<br>-0.87 &amp; * &amp; 0.10 &amp; 0.066 \</p>
-<ul>
-<li>&amp; * &amp; * &amp; * \</li>
-</ul>
-<p>0.030 &amp; * &amp; -1.23 &amp; 0.12 \<br>0.039 &amp; * &amp; 0.79 &amp; -0.82<br>\end{array}\right] \mathrm{m}^{-1}<br>$$<br>其中非背景分类的部分是可以改变的，但是需要遵守一定的概率原则；含有背景分类的部分不能改变，程序会自动调整以满足前述概率原则。值得注意的是，对角线元素是负数，非对角线元素是非负的（这是和自转移以及协转移相关的，自己转移到自己的概率随着滞后距离的增加必定是减小的，而两个不同分类之间的转移随着滞后距离的增加自然是增加的，而转移率实际上就是转移概率的斜率，自然会满足上面的条件）。</p>
+<h2 id="转移率方法"><a href="#转移率方法" class="headerlink" title="转移率方法"></a>转移率方法</h2><p>所谓转移率就是计算连续转移概率矩阵的方程所提到的转移率矩阵$R_{\phi}$的输入元素。转移率可以被解释为转移概率在滞后距离为零时的斜率。因此，一个建立转移率矩阵的方法需要估计转移概率数据的斜率：</p>
+<script type="math/tex; mode=display">
+\frac{\partial t_{jk}(h \rightarrow 0)}{\partial h_\phi}</script><p>对于一个四分类的例子来说（debris flow, floodplain, levee, channel）转移率矩阵可以被建立为:</p>
+<script type="math/tex; mode=display">
+\mathbf{R}_{z}=\left[\begin{array}{cccc}
+-0.87 & * & 0.10 & 0.066 \\
+* & * & * & * \\
+0.030 & * & -1.23 & 0.12 \\
+0.039 & * & 0.79 & -0.82
+\end{array}\right] \mathrm{m}^{-1}</script><p>其中非背景分类的部分是可以改变的，但是需要遵守一定的概率原则；含有背景分类的部分不能改变，程序会自动调整以满足前述概率原则。值得注意的是，对角线元素是负数，非对角线元素是非负的（这是和自转移以及协转移相关的，自己转移到自己的概率随着滞后距离的增加必定是减小的，而两个不同分类之间的转移随着滞后距离的增加自然是增加的，而转移率实际上就是转移概率的斜率，自然会满足上面的条件）。</p>
 <hr>
-<h2 id="使用某一特定滞后距离转移概率数据的离散滞后距离方法"><a href="#使用某一特定滞后距离转移概率数据的离散滞后距离方法" class="headerlink" title="使用某一特定滞后距离转移概率数据的离散滞后距离方法"></a>使用某一特定滞后距离转移概率数据的离散滞后距离方法</h2><p>MCMOD使用特征分析的方法来从特殊滞后距离的转移概率数据中建立转移率矩阵，其中$\Delta h_\phi$将在两者(两种岩性)相关的距离内选取，例如下面这个垂向的转移概率矩阵：<br>$$<br>\mathbf{T}\left(\Delta h_{z}=0.6 \mathrm{~m}\right)=\left[\begin{array}{llll}<br>0.6182 &amp; 0.2892 &amp; 0.0529 &amp; 0.0397 \<br>0.0325 &amp; 0.8061 &amp; 0.0787 &amp; 0.0826 \<br>0.0192 &amp; 0.3817 &amp; 0.5258 &amp; 0.0727 \<br>0.0168 &amp; 0.0995 &amp; 0.2359 &amp; 0.6478<br>\end{array}\right]<br>$$<br>通过这个特定距离的转移概率（离散）计算出转移率，再通过转移率计算出连续的转移概率。</p>
+<h2 id="使用某一特定滞后距离转移概率数据的离散滞后距离方法"><a href="#使用某一特定滞后距离转移概率数据的离散滞后距离方法" class="headerlink" title="使用某一特定滞后距离转移概率数据的离散滞后距离方法"></a>使用某一特定滞后距离转移概率数据的离散滞后距离方法</h2><p>MCMOD使用特征分析的方法来从特殊滞后距离的转移概率数据中建立转移率矩阵，其中$\Delta h_\phi$将在两者(两种岩性)相关的距离内选取，例如下面这个垂向的转移概率矩阵：</p>
+<script type="math/tex; mode=display">
+\mathbf{T}\left(\Delta h_{z}=0.6 \mathrm{~m}\right)=\left[\begin{array}{llll}
+0.6182 & 0.2892 & 0.0529 & 0.0397 \\
+0.0325 & 0.8061 & 0.0787 & 0.0826 \\
+0.0192 & 0.3817 & 0.5258 & 0.0727 \\
+0.0168 & 0.0995 & 0.2359 & 0.6478
+\end{array}\right]</script><p>通过这个特定距离的转移概率（离散）计算出转移率，再通过转移率计算出连续的转移概率。</p>
 <hr>
-<h2 id="内嵌马尔科夫链分析的转移概率方法"><a href="#内嵌马尔科夫链分析的转移概率方法" class="headerlink" title="内嵌马尔科夫链分析的转移概率方法"></a>内嵌马尔科夫链分析的转移概率方法</h2><p>内嵌马尔可夫链分析是估计分离的地质单元事件发生在临近的另一个地质单元特定方向上的条件概率（通俗一点说就是某一个方向上，A分类出现在B分类之后的条件概率）。举个例子，对于上述的四分类系统中，内嵌转移概率$\pi_{jk,\phi}$在垂直方向$(z)$上被定义为：<br>$$<br>\pi_{43,\phi} = Pr{levee \ occurs \ above \ | \ channel\  occurs\ below }<br>$$<br>因此内嵌转移概率矩阵$\boldsymbol{\Pi}<em>{z}$可以被构建为：<br>$$<br>\boldsymbol{\Pi}</em>{z}=\left[\begin{array}{cccc}</p>
-<ul>
-<li>&amp; 0.803 &amp; 0.124 &amp; 0.073 \</li>
-</ul>
-<p>0.176 &amp; - &amp; 0.390 &amp; 0.434 \<br>0.026 &amp; 0.846 &amp; - &amp; 0.128 \<br>0.045 &amp; 0.058 &amp; 0.896 &amp; -<br>\end{array}\right]<br>$$<br>注意，对角线上的自转移被视为无法观测到的，因此，对角线上的输入元素是空着的。从解释的观点来说，(4)式中$\pi_{43,z} &gt;&gt; \pi_{41,z}$以及$\pi_{43,z} &gt;&gt; \pi_{42,z}$意味着levee相对来说趋向于出现在channel的上面。</p>
-<p>如果有岩层更进一步的平均长度$\overline{L}<em>{j,z}$的信息，那么内嵌转移概率（通过频率来估计的）可以通过下式转化为转移率矩阵：<br>$$<br>r</em>{jk,z} = \frac{\pi_{jk,z}}{\overline{L}<em>{j,z}}\<br>r</em>{jj,z} = - \frac{1}{\overline{L}_{j,z}}<br>$$<br>因此，开发转移率矩阵的方法步骤是：</p>
+<h2 id="内嵌马尔科夫链分析的转移概率方法"><a href="#内嵌马尔科夫链分析的转移概率方法" class="headerlink" title="内嵌马尔科夫链分析的转移概率方法"></a>内嵌马尔科夫链分析的转移概率方法</h2><p>内嵌马尔可夫链分析是估计分离的地质单元事件发生在临近的另一个地质单元特定方向上的条件概率（通俗一点说就是某一个方向上，A分类出现在B分类之后的条件概率）。举个例子，对于上述的四分类系统中，内嵌转移概率$\pi_{jk,\phi}$在垂直方向$(z)$上被定义为：</p>
+<script type="math/tex; mode=display">
+\pi_{43,\phi} = Pr\{levee \ occurs \ above \ | \ channel\  occurs\ below \}</script><p>因此内嵌转移概率矩阵$\boldsymbol{\Pi}_{z}$可以被构建为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{\Pi}_{z}=\left[\begin{array}{cccc}
+- & 0.803 & 0.124 & 0.073 \\
+0.176 & - & 0.390 & 0.434 \\
+0.026 & 0.846 & - & 0.128 \\
+0.045 & 0.058 & 0.896 & -
+\end{array}\right]</script><p>注意，对角线上的自转移被视为无法观测到的，因此，对角线上的输入元素是空着的。从解释的观点来说，(4)式中$\pi_{43,z} &gt;&gt; \pi_{41,z}$以及$\pi_{43,z} &gt;&gt; \pi_{42,z}$意味着levee相对来说趋向于出现在channel的上面。</p>
+<p>如果有岩层更进一步的平均长度$\overline{L}_{j,z}$的信息，那么内嵌转移概率（通过频率来估计的）可以通过下式转化为转移率矩阵：</p>
+<script type="math/tex; mode=display">
+r_{jk,z} = \frac{\pi_{jk,z}}{\overline{L}_{j,z}}\\
+r_{jj,z} = - \frac{1}{\overline{L}_{j,z}}</script><p>因此，开发转移率矩阵的方法步骤是：</p>
 <ol>
 <li>根据并置趋势的地质解释或者数据建立内嵌转移概率矩阵；</li>
 <li>建立平均长度；</li>
 <li>根据(5)式将内嵌转移概率转化为转移率。</li>
 </ol>
-<p>注意非对角线元素需要满足:<br>$$<br>\sum^K_{k = 1}\pi_{jk,z} = 1<br>$$<br>如果设定了背景类别，矩阵中包含了背景类别的行列元素就不需要精确规定（可以将它们设置为零），这样根据内嵌转移概率以及平均长度改进后的转移率矩阵$R_z$为：<br>$$<br>\left[\begin{array}{cccc}<br>\bar{L}_{1, z}=1.15 &amp; * &amp; 0.12 &amp; 0.075 \</p>
-<ul>
-<li>&amp; * &amp; * &amp; * \</li>
-</ul>
-<p>0.025 &amp; * &amp; \bar{L}<em>{3, z}=0.82 &amp; 0.10 \<br>0.04 &amp; * &amp; 0.96 &amp; \bar{L}</em>{4, z}=1.24<br>\end{array}\right]<br>$$<br>其中第2各分类被设置为背景类别，这就是为什么含有该类别的元素被设定成了任意值，由此建立的马尔科夫链如下图所示：</p>
+<p>注意非对角线元素需要满足:</p>
+<script type="math/tex; mode=display">
+\sum^K_{k = 1}\pi_{jk,z} = 1</script><p>如果设定了背景类别，矩阵中包含了背景类别的行列元素就不需要精确规定（可以将它们设置为零），这样根据内嵌转移概率以及平均长度改进后的转移率矩阵$R_z$为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cccc}
+\bar{L}_{1, z}=1.15 & * & 0.12 & 0.075 \\
+* & * & * & * \\
+0.025 & * & \bar{L}_{3, z}=0.82 & 0.10 \\
+0.04 & * & 0.96 & \bar{L}_{4, z}=1.24
+\end{array}\right]</script><p>其中第2各分类被设置为背景类别，这就是为什么含有该类别的元素被设定成了任意值，由此建立的马尔科夫链如下图所示：</p>
 <p><img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/20210518114127.png" srcset="/img/loading.gif" alt="image-20210518114127505"></p>
 <p>可以看到，由内嵌转移概率方法对测量转移概率的拟合相对初试模型（最大熵因子法）来说稍稍更好一点。</p>
 <hr>
-<h2 id="内嵌马尔科夫链分析的转移频率方法"><a href="#内嵌马尔科夫链分析的转移频率方法" class="headerlink" title="内嵌马尔科夫链分析的转移频率方法"></a>内嵌马尔科夫链分析的转移频率方法</h2><p>所谓内嵌转移频率（垂直方向上）被定义为：<br>$$<br>f_{43,z} = Pr{ levee\ occurs\ above\ {\bf and} \ channel\ occurs\ below}<br>$$<br>于是内嵌转移频率矩阵$F_z$可以被表示为：<br>$$<br>\mathbf{F}<em>{z}=\left[\begin{array}{llll}<br>(0.0841) &amp; 0.0677 &amp; 0.0101 &amp; 0.0063 \<br>0.0672 &amp; (0.3468) &amp; 0.1264 &amp; 0.1713 \<br>0.0085 &amp; 0.2971 &amp; (0.3395) &amp; 0.0340 \<br>0.0085 &amp; 0.0000 &amp; 0.2031 &amp; (0.2115)<br>\end{array}\right]<br>$$<br>其中对角线元素（插入的部分）是对应$j$类别嵌入事件的边缘频率$f</em>{j,z}$的行列之和：<br>$$<br>f_{j,z} = \sum^K_{k \not= j}f_{jk,z} = \sum^K_{j \not= k}f_{kj,z}<br>$$<br>再加上平均长度$\overline{L}<em>{j,z}$的信息，转移频率可以转化为转移率通过：<br>$$<br>r</em>{jk,z} = \frac{f_{jk,z}}{f_{j,z} \overline{L}<em>{j,z}} \quad \forall k \neq j<br>$$<br>类似内嵌转移概率，MCMOD同样可以由转移频率构建出转移率矩阵的非对角线部分的元素：<br>$$<br>\left[\begin{array}{cccc}<br>\bar{L}</em>{1, z}=1.15 &amp; * &amp; 0.0101 &amp; 0.0063 \</p>
-<ul>
-<li>&amp; \bar{L}_{1, z}=2.27 . &amp; * &amp; * \</li>
-</ul>
-<p>0.0085 &amp; * &amp; \bar{L}<em>{3, z}=0.82 &amp; 0.0340 \<br>0.0085 &amp; * &amp; 0.2031 &amp; \bar{L}</em>{4, z}=1.24<br>\end{array}\right]<br>$$<br>尽管非对角线元素并不需要额外的设定，但是这个方法需要背景类别的平均长度，因为边缘频率依赖于各个类别的比例以及平均长度。</p>
+<h2 id="内嵌马尔科夫链分析的转移频率方法"><a href="#内嵌马尔科夫链分析的转移频率方法" class="headerlink" title="内嵌马尔科夫链分析的转移频率方法"></a>内嵌马尔科夫链分析的转移频率方法</h2><p>所谓内嵌转移频率（垂直方向上）被定义为：</p>
+<script type="math/tex; mode=display">
+f_{43,z} = Pr\{ levee\ occurs\ above\ {\bf and} \ channel\ occurs\ below\}</script><p>于是内嵌转移频率矩阵$F_z$可以被表示为：</p>
+<script type="math/tex; mode=display">
+\mathbf{F}_{z}=\left[\begin{array}{llll}
+(0.0841) & 0.0677 & 0.0101 & 0.0063 \\
+0.0672 & (0.3468) & 0.1264 & 0.1713 \\
+0.0085 & 0.2971 & (0.3395) & 0.0340 \\
+0.0085 & 0.0000 & 0.2031 & (0.2115)
+\end{array}\right]</script><p>其中对角线元素（插入的部分）是对应$j$类别嵌入事件的边缘频率$f_{j,z}$的行列之和：</p>
+<script type="math/tex; mode=display">
+f_{j,z} = \sum^K_{k \not= j}f_{jk,z} = \sum^K_{j \not= k}f_{kj,z}</script><p>再加上平均长度$\overline{L}_{j,z}$的信息，转移频率可以转化为转移率通过：</p>
+<script type="math/tex; mode=display">
+r_{jk,z} = \frac{f_{jk,z}}{f_{j,z} \overline{L}_{j,z}} \quad \forall k \neq j</script><p>类似内嵌转移概率，MCMOD同样可以由转移频率构建出转移率矩阵的非对角线部分的元素：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cccc}
+\bar{L}_{1, z}=1.15 & * & 0.0101 & 0.0063 \\
+* & \bar{L}_{1, z}=2.27 . & * & * \\
+0.0085 & * & \bar{L}_{3, z}=0.82 & 0.0340 \\
+0.0085 & * & 0.2031 & \bar{L}_{4, z}=1.24
+\end{array}\right]</script><p>尽管非对角线元素并不需要额外的设定，但是这个方法需要背景类别的平均长度，因为边缘频率依赖于各个类别的比例以及平均长度。</p>
 <hr>
-<h2 id="“独立性”或者“最大熵因子（无序）”转移频率方法"><a href="#“独立性”或者“最大熵因子（无序）”转移频率方法" class="headerlink" title="“独立性”或者“最大熵因子（无序）”转移频率方法"></a>“独立性”或者“最大熵因子（无序）”转移频率方法</h2><p>地质系统的并置趋势反映了地层序列的有序或者无序的程度，地层之间转移频率$f_{jk,\phi}$（某一种地层紧挨着其他地层的概率）的熵因子$S_{\phi}$可以量化某一特殊方向$\phi$上的并置趋势的无序性，其中熵因子定义（参考“熵分析方法”）为：<br>$$<br>S_{\phi} = - \sum_j \sum_k f_{jk,\phi} \ln{f_{jk,\phi}}<br>$$<br>考虑一个问题，“最大程度无序的系统来说，地层应该是什么样的呢？”。从我们所参考的状态来说，其中一个答案可能是能够判断出观察到的地层序列显示非随机的并置趋势或者说是一定程度上的有序。</p>
-<p>在应用内嵌马尔科夫链分析时，地质学家将兴趣放在量化他们对用地质相连续性的解释上，尤其是在垂直方向上。四种类别岩性连续性的“随机”或者独立的转移频率为：<br>$$<br>\left[\begin{array}{llll}<br>f_{1} f_{1} &amp; f_{1} f_{2} &amp; f_{1} f_{3} &amp; f_{1} f_{4} \<br>f_{2} f_{1} &amp; f_{2} f_{2} &amp; f_{2} f_{3} &amp; f_{1} f_{4} \<br>f_{3} f_{1} &amp; f_{3} f_{2} &amp; f_{3} f_{3} &amp; f_{3} f_{4} \<br>f_{4} f_{1} &amp; f_{4} f_{2} &amp; f_{4} f_{3} &amp; f_{4} f_{4}<br>\end{array}\right]<br>$$<br>其中$f_i$代表连续出现$i$类别的“边缘”频率，但在实际操作中这个问题并不简单。通常来说，自转移的情况是无法观察到的（尤其是对于钻孔数据来说），所以不仅仅是对角线上的转移频率，就连边缘频率也是没有办法直接估计的。而非对角线上的转移_计数_是可以被精确估计的，因为协转移（不同类别之间的转移）是可以观察到的。</p>
-<p>假设自转移观察不到，一个更加实际的问题就被暴露出来了。于是，取而代之的是，非对角转移频率$\eta_{jk}$的观测值，被定义为转移计数除以所有非对角转移计数的总和：<br>$$<br>\left[\begin{array}{llll}</p>
-<ul>
-<li>&amp; \eta_{12} &amp; \eta_{13} &amp; \eta_{14} \<br>\eta_{21} &amp; - &amp; \eta_{23} &amp; \eta_{24} \<br>\eta_{31} &amp; \eta_{32} &amp; - &amp; \eta_{34} \<br>\eta_{41} &amp; \eta_{42} &amp; \eta_{43} &amp; -<br>\end{array}\right]<br>$$<br>其中，自转移无法观察到，所以留为空白。</li>
-</ul>
-<p>独立转移频率的目标是找到满足以下条件的$f_i$：<br>$$<br>\frac{1}{T} \sum^K_{j \neq i} f_i f_j = \sum_{j \neq i}^K \eta_{ij} \quad \forall i = 1,…,K\<br>T = \sum^K_{i = 1}\sum^K_{i \neq j} f_i f_j<br>$$<br>上式的非线性系统可以通过IPF（iterative proportion fitting)方法解决。生成的独立模型将显示嵌入事件$\eta_i$的相同边缘频率：<br>$$<br>\eta_{i}=\sum_{j \neq i}^{K} \eta_{i j} \quad \forall i=1, \ldots, K<br>$$<br>以上，与$f_i$对应的非对角线转移频率将会是独立的。通过将$\eta_i$与比例$p_i$除以平均长度$\bar{L}<em>i$成比例，可以将连续滞后马尔可夫链模型与该独立性模型联系起来：<br>$$<br>\frac{p</em>{i}}{L_{i}} \propto \eta_{i} \quad \forall i=1, \ldots, K<br>$$<br>因此，给定比例和平均长度的设定，就可以得到一个包含独立转移频率的连续滞后马尔科夫链。</p>
-<p>因此一个特殊的问题出现了，“对于给定的比例和平均长度，什么是使得熵最大的转移频率矩阵呢？”巧合的是统计独立性的概念正好与最大熵的结果是一致的。在先前的例子中，比例和平均长度对应的独立或者最大熵转移频率矩阵$F_z^{(S\ max)}$为<br>$$<br>\mathbf{F}<em>{z}^{(S \max )}=\left[\begin{array}{cccc}<br>(0.0841) &amp; 0.0377 &amp; 0.0311 &amp; 0.0152 \<br>0.0377 &amp; (0.3671) &amp; 0.2196 &amp; 0.1075 \<br>0.0311 &amp; 0.2196 &amp; (0.3396) &amp; 0.0888 \<br>0.0152 &amp; 0.1075 &amp; 0.0888 &amp; (0.2115)<br>\end{array}\right]<br>$$<br>其中对角线元素代表某一行或者某一列的边缘频率的总和。这个矩阵可以用来作为解释在相同比例和平均长度的情况下与最大无序程度的地层连续性相关的并置趋势的基础。例如，如果观测到的转移频率$f</em>{43,z}$比$f_{z}^{(S\ max)}$更大，一个可能的推断是此处_levee_出现在_channel_的上方是具有统计趋势的.</p>
+<h2 id="“独立性”或者“最大熵因子（无序）”转移频率方法"><a href="#“独立性”或者“最大熵因子（无序）”转移频率方法" class="headerlink" title="“独立性”或者“最大熵因子（无序）”转移频率方法"></a>“独立性”或者“最大熵因子（无序）”转移频率方法</h2><p>地质系统的并置趋势反映了地层序列的有序或者无序的程度，地层之间转移频率$f_{jk,\phi}$（某一种地层紧挨着其他地层的概率）的熵因子$S_{\phi}$可以量化某一特殊方向$\phi$上的并置趋势的无序性，其中熵因子定义（参考“熵分析方法”）为：</p>
+<script type="math/tex; mode=display">
+S_{\phi} = - \sum_j \sum_k f_{jk,\phi} \ln{f_{jk,\phi}}</script><p>考虑一个问题，“最大程度无序的系统来说，地层应该是什么样的呢？”。从我们所参考的状态来说，其中一个答案可能是能够判断出观察到的地层序列显示非随机的并置趋势或者说是一定程度上的有序。</p>
+<p>在应用内嵌马尔科夫链分析时，地质学家将兴趣放在量化他们对用地质相连续性的解释上，尤其是在垂直方向上。四种类别岩性连续性的“随机”或者独立的转移频率为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{llll}
+f_{1} f_{1} & f_{1} f_{2} & f_{1} f_{3} & f_{1} f_{4} \\
+f_{2} f_{1} & f_{2} f_{2} & f_{2} f_{3} & f_{1} f_{4} \\
+f_{3} f_{1} & f_{3} f_{2} & f_{3} f_{3} & f_{3} f_{4} \\
+f_{4} f_{1} & f_{4} f_{2} & f_{4} f_{3} & f_{4} f_{4}
+\end{array}\right]</script><p>其中$f_i$代表连续出现$i$类别的“边缘”频率，但在实际操作中这个问题并不简单。通常来说，自转移的情况是无法观察到的（尤其是对于钻孔数据来说），所以不仅仅是对角线上的转移频率，就连边缘频率也是没有办法直接估计的。而非对角线上的转移_计数_是可以被精确估计的，因为协转移（不同类别之间的转移）是可以观察到的。</p>
+<p>假设自转移观察不到，一个更加实际的问题就被暴露出来了。于是，取而代之的是，非对角转移频率$\eta_{jk}$的观测值，被定义为转移计数除以所有非对角转移计数的总和：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{llll}
+- & \eta_{12} & \eta_{13} & \eta_{14} \\
+\eta_{21} & - & \eta_{23} & \eta_{24} \\
+\eta_{31} & \eta_{32} & - & \eta_{34} \\
+\eta_{41} & \eta_{42} & \eta_{43} & -
+\end{array}\right]</script><p>其中，自转移无法观察到，所以留为空白。</p>
+<p>独立转移频率的目标是找到满足以下条件的$f_i$：</p>
+<script type="math/tex; mode=display">
+\frac{1}{T} \sum^K_{j \neq i} f_i f_j = \sum_{j \neq i}^K \eta_{ij} \quad \forall i = 1,...,K\\
+T = \sum^K_{i = 1}\sum^K_{i \neq j} f_i f_j</script><p>上式的非线性系统可以通过IPF（iterative proportion fitting)方法解决。生成的独立模型将显示嵌入事件$\eta_i$的相同边缘频率：</p>
+<script type="math/tex; mode=display">
+\eta_{i}=\sum_{j \neq i}^{K} \eta_{i j} \quad \forall i=1, \ldots, K</script><p>以上，与$f_i$对应的非对角线转移频率将会是独立的。通过将$\eta_i$与比例$p_i$除以平均长度$\bar{L}_i$成比例，可以将连续滞后马尔可夫链模型与该独立性模型联系起来：</p>
+<script type="math/tex; mode=display">
+\frac{p_{i}}{L_{i}} \propto \eta_{i} \quad \forall i=1, \ldots, K</script><p>因此，给定比例和平均长度的设定，就可以得到一个包含独立转移频率的连续滞后马尔科夫链。</p>
+<p>因此一个特殊的问题出现了，“对于给定的比例和平均长度，什么是使得熵最大的转移频率矩阵呢？”巧合的是统计独立性的概念正好与最大熵的结果是一致的。在先前的例子中，比例和平均长度对应的独立或者最大熵转移频率矩阵$F_z^{(S\ max)}$为</p>
+<script type="math/tex; mode=display">
+\mathbf{F}_{z}^{(S \max )}=\left[\begin{array}{cccc}
+(0.0841) & 0.0377 & 0.0311 & 0.0152 \\
+0.0377 & (0.3671) & 0.2196 & 0.1075 \\
+0.0311 & 0.2196 & (0.3396) & 0.0888 \\
+0.0152 & 0.1075 & 0.0888 & (0.2115)
+\end{array}\right]</script><p>其中对角线元素代表某一行或者某一列的边缘频率的总和。这个矩阵可以用来作为解释在相同比例和平均长度的情况下与最大无序程度的地层连续性相关的并置趋势的基础。例如，如果观测到的转移频率$f_{43,z}$比$f_{z}^{(S\ max)}$更大，一个可能的推断是此处_levee_出现在_channel_的上方是具有统计趋势的.</p>
 <p>综上所述，开发转移率矩阵有以下的步骤：</p>
 <ol>
 <li>建立各类别的比例和平均长度；</li>
 <li>计算最大熵因子转移频率矩阵$F_{z}^{(S\ max)}$以及相应的转移率；</li>
 <li>解释相对于最大熵因子转移率的非对角转移率。</li>
 </ol>
-<p>举个例子里说，根据（11），最大熵因子转化率$r_{jk,z}^{(S\ max)}$可以通过下式计算：<br>$$<br>r_{j k, z}^{(S \max )}=\frac{f_{j k, z}^{(S \max )}}{\bar{L}<em>{j, z} \sum</em>{k \neq j} f_{j k, z}^{(S \max )}}<br>$$<br>最大熵转移率对应的垂向转移率矩阵表示为：<br>$$<br>\mathbf{R}<em>{z}^{(S \max )}=\left[\begin{array}{llll}<br>\frac{-1}{\bar{L}</em>{1, z}=1.15 \mathrm{<del>m}} &amp; 1.80 r_{12, z}^{(S \max )} &amp; 0.32 r_{13, z}^{(S \max )} &amp; 0.41 r_{14, z}^{(S \max )} \<br>1.78 r_{21, z}^{(S \text { max })} &amp; \frac{-1}{\bar{L}_{2, z}=2.27 \mathrm{</del>m}} &amp; 0.58 r_{23, z}^{(S \max )} &amp; 1.59 r_{24, z}^{(S \max )} \<br>0.27 r_{31, z}^{(S \max )} &amp; 1.35 r_{32, z}^{(S \max )} &amp; \frac{-1}{\bar{L}<em>{3, z}=0.82 \mathrm{~m}} &amp; 0.45 r</em>{34, z}^{(S \max )} \<br>0.56 r_{41, z}^{(S \max )} &amp; 0.00 r_{42, z}^{(S \max )} &amp; 2.29 r_{43, z}^{(S \max )} &amp; \frac{-1}{\bar{L}<em>{4, z}=1.24 \mathrm{~m}}<br>\end{array}\right]<br>$$<br>这样计算出来的非对角线上的元素通过系数乘以$r</em>{jk,z}^{(S\ max)}$得到，如果比1小则表示两个类别具有并置趋势（在某个方向上某一分类通常紧挨着另一分类出现）小于1时则不具有并置趋势。</p>
+<p>举个例子里说，根据（11），最大熵因子转化率$r_{jk,z}^{(S\ max)}$可以通过下式计算：</p>
+<script type="math/tex; mode=display">
+r_{j k, z}^{(S \max )}=\frac{f_{j k, z}^{(S \max )}}{\bar{L}_{j, z} \sum_{k \neq j} f_{j k, z}^{(S \max )}}</script><p>最大熵转移率对应的垂向转移率矩阵表示为：</p>
+<script type="math/tex; mode=display">
+\mathbf{R}_{z}^{(S \max )}=\left[\begin{array}{llll}
+\frac{-1}{\bar{L}_{1, z}=1.15 \mathrm{~m}} & 1.80 r_{12, z}^{(S \max )} & 0.32 r_{13, z}^{(S \max )} & 0.41 r_{14, z}^{(S \max )} \\
+1.78 r_{21, z}^{(S \text { max })} & \frac{-1}{\bar{L}_{2, z}=2.27 \mathrm{~m}} & 0.58 r_{23, z}^{(S \max )} & 1.59 r_{24, z}^{(S \max )} \\
+0.27 r_{31, z}^{(S \max )} & 1.35 r_{32, z}^{(S \max )} & \frac{-1}{\bar{L}_{3, z}=0.82 \mathrm{~m}} & 0.45 r_{34, z}^{(S \max )} \\
+0.56 r_{41, z}^{(S \max )} & 0.00 r_{42, z}^{(S \max )} & 2.29 r_{43, z}^{(S \max )} & \frac{-1}{\bar{L}_{4, z}=1.24 \mathrm{~m}}
+\end{array}\right]</script><p>这样计算出来的非对角线上的元素通过系数乘以$r_{jk,z}^{(S\ max)}$得到，如果比1小则表示两个类别具有并置趋势（在某个方向上某一分类通常紧挨着另一分类出现）小于1时则不具有并置趋势。</p>
 <p>最大熵的概念在解释已存在的马尔科夫链模型的并置趋势时是非常有用的。举个例子，你可以通过比例和平均长度建立一个已存在的模型，比如说（11），然后生成一个马尔科夫链，它有着最大程度的无序的并置趋势。再与转移概率方法进行比较，从而解释地层是否展现出了一定程度的有序并置趋势。在这过程中必须要给定全部类别的平均长度，包括背景类别。</p>
 
             </article>
             <hr>
             <div>
               <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%9F%A5%E8%AF%86/%E8%BD%AF%E4%BB%B6%E6%93%8D%E4%BD%9C/">软件操作</a>
+                    
+                  </div>
                 
                 
                   <div class="post-meta">
@@ -760,6 +845,37 @@
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+      MathJax.Hub.Register.StartupHook("End Jax",function () {
+        var BROWSER = MathJax.Hub.Browser;
+        var jax = "HTML-CSS";
+        if (BROWSER.isMSIE && BROWSER.hasMathPlayer) jax = "NativeMML";
+        return MathJax.Hub.setRenderer(jax);
+      });
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script  src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
 
 
 
