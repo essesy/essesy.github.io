@@ -1436,3 +1436,6 @@ video {
   width: -webkit-fill-available;
   max-width: 670px;
 }
+.MathJax_Display {
+  overflow: auto;
+}
