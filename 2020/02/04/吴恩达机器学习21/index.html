@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/1.png">
+  <link rel="icon" type="image/png" href="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/1.png">
+  <link rel="stylesheet" href="/css/icofont/icofont.min.css">
+  <script type="text/javascript">
+    document.createElement('video');document.createElement('audio');document.createElement('track');
+  </script>
+  <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+  <script src="http://vjs.zencdn.net/4.12/video.js"></script>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="tabris的遥远星系">
+  <meta name="author" content="Tabris Trees Severus">
+  <meta name="keywords" content="Python,Machine Learning,物理,数学,地球科学,哲学,生活">
+  <title>吴恩达机器学习——梯度下降法 - 银海里泛摘天星</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_9n5xqdrq0nc.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>银海里泛摘天星</strong>&nbsp;</a>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+
+              <!--这里判断有没有二级菜单，有的话遍历出二级菜单（就是竖着的那部分）-->
+              
+
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+
+              <!--这里判断有没有二级菜单，有的话遍历出二级菜单（就是竖着的那部分）-->
+              
+
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+
+              <!--这里判断有没有二级菜单，有的话遍历出二级菜单（就是竖着的那部分）-->
+              
+                <ul class="sub-menu">
+                  <!--//遍历出二级菜单（就是竖着的那部分）-->
+                  
+                    <li>
+                      <!--//a标签里当然是输出二级菜单的路径咯-->
+                      <a href="/categories/">
+                        <!--//i标签里输出二级菜单的icon的class咯-->
+                        <i class="icofont-abc"></i>
+                        <!--//这里输出二级菜单名咯-->
+                        分类
+                      </a>
+                    </li>
+                  
+                    <li>
+                      <!--//a标签里当然是输出二级菜单的路径咯-->
+                      <a href="/categories/%E6%80%9D%E8%80%83/">
+                        <!--//i标签里输出二级菜单的icon的class咯-->
+                        <i class="icofont-love"></i>
+                        <!--//这里输出二级菜单名咯-->
+                        碎碎念
+                      </a>
+                    </li>
+                  
+                    <li>
+                      <!--//a标签里当然是输出二级菜单的路径咯-->
+                      <a href="/categories/%E7%9F%A5%E8%AF%86/">
+                        <!--//i标签里输出二级菜单的icon的class咯-->
+                        <i class="icofont-notebook"></i>
+                        <!--//这里输出二级菜单名咯-->
+                        知识
+                      </a>
+                    </li>
+                  
+                    <li>
+                      <!--//a标签里当然是输出二级菜单的路径咯-->
+                      <a href="/categories/%E5%85%B4%E8%B6%A3/">
+                        <!--//i标签里输出二级菜单的icon的class咯-->
+                        <i class="icofont-pulse"></i>
+                        <!--//这里输出二级菜单名咯-->
+                        热爱
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+
+              <!--这里判断有没有二级菜单，有的话遍历出二级菜单（就是竖着的那部分）-->
+              
+
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+
+              <!--这里判断有没有二级菜单，有的话遍历出二级菜单（就是竖着的那部分）-->
+              
+
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+
+              <!--这里判断有没有二级菜单，有的话遍历出二级菜单（就是竖着的那部分）-->
+              
+
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="icofont-like"></i>
+              有趣的东西</a>
+
+              <!--这里判断有没有二级菜单，有的话遍历出二级菜单（就是竖着的那部分）-->
+              
+                <ul class="sub-menu">
+                  <!--//遍历出二级菜单（就是竖着的那部分）-->
+                  
+                    <li>
+                      <!--//a标签里当然是输出二级菜单的路径咯-->
+                      <a href="https://zfile.tabirstrees.top" target="_blank" rel="noopener">
+                        <!--//i标签里输出二级菜单的icon的class咯-->
+                        <i class="icofont-cloud"></i>
+                        <!--//这里输出二级菜单名咯-->
+                        藏星星的树
+                      </a>
+                    </li>
+                  
+                </ul>
+              
+
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://trees-1301133429.cos.ap-nanjing.myqcloud.com/blogweb/post.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-02-04 11:22">
+                    星期二, 二月 4日 2020, 11:22 上午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    一共2.3k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    大概需要
+                    24
+                     分钟
+                  </span>
+                
+
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-warning">
+                更新于：星期六, 四月 3日 2021, 8:21 晚上
+              </p>
+            
+            <article class="markdown-body">
+              <p>太惨了，因为七牛云的域名关系，这个内容里面的图片暂时无法访问了，现在有没有时间去弄这些东西，这能暂时搁置，后面有时间的话再把那些图片找回来，目前的图片已经转移到腾讯云上来了，后面应该是都可以访问的！！！</p>
+<hr>
+<hr>
+<p>之前老师让我们去看机器学习的内容,找到了网上普遍推荐的吴恩达老师的机器学习视频,在Coursrea上看了一点点,后面因为网络问题(<del>大家都知道,大天朝的高墙永远耸立</del>)放弃扔那儿了,最近几天新冠病毒肆虐,在家闲的无聊又不想看考研的东西,也不想写论文(<del>真不是我不想,但是我懒</del>)就把它重新拿出来看了。并且看了各位大佬的blog之后深觉挫败，想要把自己也伪装成一个大佬，所以写了这篇文章。有什么问题可以留言哦！！<code>\(^o^)/</code></p>
+<a id="more"></a>
+
+<h1 id="关于机器学习算法的分类"><a href="#关于机器学习算法的分类" class="headerlink" title="关于机器学习算法的分类"></a>关于机器学习算法的分类</h1><p>目前来说较为明确的分类是:</p>
+<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><p>需要预先准备已经有正确结果的数据对模型进行优化调整</p>
+<ul>
+<li>回归</li>
+<li>分类</li>
+</ul>
+<h2 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h2><p>没有预先准备好的数据集,通过对数据内部结构的挖掘找出各数据间的关系来达到预定目标</p>
+<ul>
+<li>聚类</li>
+<li>分离异常值(<a href="https://zh.wikipedia.org/wiki/%E9%B8%A1%E5%B0%BE%E9%85%92%E4%BC%9A%E6%95%88%E5%BA%94" target="_blank" rel="noopener">鸡尾酒聚会效应</a>)</li>
+</ul>
+<h1 id="第一个算法-单变量线性回归"><a href="#第一个算法-单变量线性回归" class="headerlink" title="第一个算法:单变量线性回归"></a>第一个算法:单变量线性回归</h1><p>回归也就是我们通常用到的拟合,在实际的科研当中,很多时候回需要对我们得到的数据进行处理,用一个函数/曲线来拟合数据间的关系。实现这个拟合过程的算法就叫做回归算法<br><strong>单变量线性回归</strong>(Linear Regression with one Variable)指的是只有一个变量的回归过程,是线性回归里面最简单的,也是整个机器学习中最简单的算法之一(学过高中数学的应该都能理解她的含义,所以这里不过的赘述)</p>
+<h2 id="构建模型"><a href="#构建模型" class="headerlink" title="构建模型"></a>构建模型</h2><p>我们假设y(我们想要的结果)和x(我们所有的数据)之间具有如下的关系:</p>
+<p>$model:  y = \theta_0+\theta_1x=h_\theta(x)$ $\theta_i$指的是模型的参数<br><img src="http://q532jr91q.bkt.clouddn.com/blogpic_25212f5fb2b83b0478db932c17fe3de7" srcset="/img/loading.gif" alt="机器学习模型示意图"></p>
+<h2 id="构建代价函数"><a href="#构建代价函数" class="headerlink" title="构建代价函数"></a>构建代价函数</h2><p>模型建立好后，需要对参数进行调整，调整参数的过程一般来说是用另外的一个算法/模型来确定什么参数是最适合的(就像是直接将所有有可能适合的参数带入模型,然后将预测结果和正确的结果作对比,结果高度吻合的参数就是最优参数),我们把这个算法(函数)叫做<strong>代价函数</strong>(cost function),也通常翻译为损失函数</p>
+<p>最常用的代价函数算法是<strong>平方差</strong>(Squared error function)<strong>方法</strong>,也就是最小二乘法;它的原理是:预测的结果和实际的结果差值最小时的参数是最好的参数(<a href="https://baike.baidu.com/item/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95#4" target="_blank" rel="noopener">可以在这里找到关于该方法的具体定义</a>),我们这里采用的算法和最基础的算法不一样,只是在该原理上优化,采用数据集中所有数据的平均平方差最小作为最终的代价函数</p>
+<p>$cost\ function :  J(\theta_0,\theta_1)=\dfrac{1}{2m}\sum\limits_{i=0}^m(h_\theta(x_i)-y_i)^2$<br>$J(\theta_0,\theta_1)$用以表示cost function<br><img src="http://q532jr91q.bkt.clouddn.com/blogpic_f5b0fd9fd99854069b00a3b660c304a5" srcset="/img/loading.gif" alt="cost function"><br>我把官方给的资料贴出来,可以点进去之后放大查看!</p>
+<h2 id="实现目标"><a href="#实现目标" class="headerlink" title="实现目标"></a>实现目标</h2><p>我们现在的目的是调整$\theta_0,\theta_1$的值,使得我们的代价函数的值最小,这个时候的$\theta_0,\theta_1$就是最适合的模型参数<br>我们的思路是:</p>
+<ul>
+<li>start with some $\theta_0,\theta_1$</li>
+<li>keep changing $\theta_0,\theta_1$ to reduce $J(\theta_0,\theta_1)$ until we hopefully end up at a minimum</li>
+</ul>
+<p>我们这里采用<strong>梯度下降算法</strong>(Gradient descent algorithm)来解决这个问题(<a href="https://baike.baidu.com/item/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95" target="_blank" rel="noopener">点击我去往”梯度下降法”的百度页</a>)<br>通俗的来讲就是:</p>
+<blockquote>
+<p>假设你现在在一座山上的某一个位置,突然有急事需要你以最快 的速度赶到山下(最低的位置)。梯度下降算法要求你在当前位置找到坡最陡的方向,沿着这个方向走一段路程到达下一个点(不考虑你是否真的能够从那个地方走,就假如你会飞吧!)。在这个点又重复上面一样的做法,直到最低的位置(至于我们怎么知道某个位置就是最低的位置,在后面会讲到,梯度下降法不需要我们考虑这个问题)</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Gradient_ascent_%28surface%29.png" srcset="/img/loading.gif" alt="梯度下降法的三维图像表示"></p>
+</blockquote>
+<h3 id="数学表示"><a href="#数学表示" class="headerlink" title="数学表示"></a>数学表示</h3><p>我们将梯度下降法的数学表达写成下面的形式:</p>
+<p>$repeat\ until\ convergence{\ \theta_j:=\theta_j-\alpha\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1)\ $,<br>$for\  j=0\ and\ j=1}$</p>
+<p>其中$\alpha$指的是学习效率,相当于你下山的时候每一步所跨的距离<br>值得我们注意的是,这里的 $:=$ 表示的是赋值操作,即把运算所得的值还给原来的变量，学过程序设计的同学应该都知道的。但是这里的$\theta_0,\theta_1$需要同时赋值(在本文所讲的单变量线性回归当中是这样的,也有其他的算法不是同时赋值的)</p>
+<h3 id="算法特性"><a href="#算法特性" class="headerlink" title="算法特性"></a>算法特性</h3><p>我们可以看到在我们的算法使用了参数减去该参数的偏导数来进行梯度的下降,我们现在来解释为什么我们要使用这样的方法(或者说这个方法有什么样的特征)</p>
+<h4 id="关于-alpha"><a href="#关于-alpha" class="headerlink" title="关于$\alpha$"></a>关于$\alpha$</h4><p>对于单个参数的代价函数$J(\theta)$,有:<br>$\theta := \theta-\alpha\frac{\partial}{\partial\theta}J(\theta)$</p>
+<p>如果$\alpha$太小的话,$\theta$收敛的速度将会很慢(对应你下山的速度很慢,等你到的时候人家都已经解决完所有的事情了,要你有何用?)<br><img src="http://q532jr91q.bkt.clouddn.com/blogpic_cf39a956dd8e19a9c13e604da18086b2" srcset="/img/loading.gif" alt="a小"><br>如果$\alpha$太大的话,$\theta$将会有可能直接跳过最适合的值(对应你跑太快没注意其实你已经过了你要去的地方)<br><img src="http://q532jr91q.bkt.clouddn.com/blogpic_e9e557d0d03daf75c9a1842ca53a3278" srcset="/img/loading.gif" alt="a大"></p>
+<h4 id="关于初始点"><a href="#关于初始点" class="headerlink" title="关于初始点"></a>关于初始点</h4><p>如果初始点在最小点的左边,$\theta$的传递将会使得$\theta$向右边移动,从而趋向最小点($\alpha$将会乘以一个负数,即$\theta$将会减去一个负数)<br><img src="http://q532jr91q.bkt.clouddn.com/blogpic_c24250417de5ef186514c6ec53f5149b" srcset="/img/loading.gif" alt="init左"><br>同理有:初始点在最小点右边时,$\theta$将会向左边移动,从而趋向最小点<br><img src="http://q532jr91q.bkt.clouddn.com/blogpic_230b8fc028714b56ce423eb36c6de4ac" srcset="/img/loading.gif" alt="init右"><br>在梯度下降的过程中,$\theta$的值不断变化,$\frac{\partial}{\partial\theta}J(\theta)$的值也在不断变化,以下图举例来说,这个偏微分的值是在逐渐减小的(必定是这样的,因为你要取得的值是导数为0的最小值,<strong>如果函数处处连续可导,则必然趋向最小点的过程中导数的绝对值是在减小的</strong>)<br><img src="http://q532jr91q.bkt.clouddn.com/blogpic_50ba003760c1fe93a86e4bca9376b0df" srcset="/img/loading.gif" alt="导数减小"></p>
+<h4 id="关于最优解"><a href="#关于最优解" class="headerlink" title="关于最优解"></a>关于最优解</h4><p>当我们的$\theta$到达最小值时,偏导数就变为零了,这个时候式子就变成了:<br>$\theta=\theta-\alpha(0)=\theta$<br>$\theta$就已经收敛到这个位置不再变化,即使在整个函数中还有更小的值,但是我们的算法已经不想动了。也就是梯度下降法实际上只能找到局部最优解,(你可以这么理解,你下山其实是为了喝水,而只要有一个窝窝(导数为零)在就有水的存在,所以你就不用去找整座山最低的地方)<br><img src="http://q532jr91q.bkt.clouddn.com/blogpic_6c4df1ddaf629e5d741ccb91965678cb" srcset="/img/loading.gif" alt="局部最优"><br>事实上,在我们的线性回归当中,代价函数一般来说是不会像上图中那样有很多个极值点(导数为零),基本都只有一个也就是最小点,所以我们的局部最优解其实就是全局最优解。所以在本文的问题中,该算法是比较合理的!</p>
+<p>如果你想对梯度下降法有更进一步的了解,或者还不是很理解你可以<a href="https://zhuanlan.zhihu.com/p/36902908" target="_blank" rel="noopener">点击我O(∩_∩)O哈哈~</a><br>要不然你就自己上网搜!!!!!!网上很多大佬厉害着呢!</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>上面我们已经建立好了模型和算法,剩下的事就是将算法转变为代码<br>然而我在写这篇文章的时候花了很多时间,因为我在没有配置好的情况下使用了latex格式的数学公式,导致了非常多的bug。<br><img src="http://q532jr91q.bkt.clouddn.com/blogpic_8b2a6b0700feb1a4cdd03591e93a4fd2" srcset="/img/loading.gif" alt="bug">)而作为菜鸡的我对此简直是焦麻了！<code>~~~~(&gt;_&lt;)~~~~</code>所以暂时把这边文章放着,等后面有时间了就把这个算法的Python代码弄好贴上来,嘿嘿!(吴恩达的视频里没有这个算法的代码实现的内容,所以需要自己动手)</p>
+<p>另外,为了更好的学习,我把网易云课堂上吴恩达老师视频的链接放到这里(因为它比较系统,还有文档可以下载!)<br><a href="https://study.163.com/course/introduction/1004570029.htm" target="_blank" rel="noopener">快点我去网易云课堂学习吧</a></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/14/%E6%94%BE%E9%80%90%E8%80%85/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">放逐者</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/01/15/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">
+                        <span class="hidden-mobile">千山万水的第一步</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments" style="margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script defer src="//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'false' == true ? true : false;
+    var verify = 'false' == true ? true : false;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "5SwkpbHGOJB2KgABwOdCNxyF-gzGzoHsz",
+        app_key: "fP55qHxXExV199K1jwieOiC3",
+        placeholder: "神说要有光，于是你来到了这里！(≧∀≦)ゞ",
+        avatar: "robohash",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "5"
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-content mx-auto">
+      <img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/20200509212356.jpg" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'all',
+      order: 'list',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"杨可爱 - 仙剑奇侠传串烧 - 尤克里里版（翻自 麦振鸿）","artist":"杨可爱","url":"https://zfile.tabirstrees.top/directlink/3/music/%E6%9D%A8%E5%8F%AF%E7%88%B1%20-%20%E4%BB%99%E5%89%91%E5%A5%87%E4%BE%A0%E4%BC%A0%E4%B8%B2%E7%83%A7%20-%20%E5%B0%A4%E5%85%8B%E9%87%8C%E9%87%8C%E7%89%88%EF%BC%88%E7%BF%BB%E8%87%AA%20%E9%BA%A6%E6%8C%AF%E9%B8%BF%EF%BC%89.mp3","cover":"https://tvax1.sinaimg.cn/crop.0.0.1080.1080.180/006JoBc1ly8gdiq9g4ns1j30u00u0q4g.jpg?KID=imgbed,tva&Expires=1598612991&ssig=45g2KUXgSe"}]
+    });
+  }
+</script>
+
+  
+
+  
+    <!-- 自定义春节祝福 -->
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Power by Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Modified from Fluid</span></a>
+    </div>
+    <a href="https://travellings.link/" target="blank" title="开往-友链接力"><img src="https://travellings.link/assets/logo.gif" alt="开往-友链接力" width="120"></a>
+    
+  <div>
+    
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      流星🌠划过 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
+    
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      异乡来客👽 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div>
+    <a href="http://beian.miit.gov.cn/" target="_blank" class="beian-icp"
+       rel="nofollow noopener">渝ICP备20006079号</a>
+    
+      <a
+        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=50023402000458"
+        rel="nofollow noopener"
+        class="beian-police"
+        target="_blank"
+      >
+        <span class="beian-police-sep">&nbsp;|&nbsp;</span>
+        
+          <img src="/img/police_beian.png" alt="police-icon" />
+        
+        <span>渝公网安备 50023402000458号</span>
+      </a>
+  </div>
+  
+
+
+    
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("01/15/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "🌟星系🌟已在宇宙中孤独旋转💫&nbsp"+dnum+"&nbsp天";
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }
+      setInterval("createtime()",250);
+      </script>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-166333226-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').each(function () {
+        const pre = $(this);
+        if (pre.find('code.mermaid').length > 0) {
+          return;
+        }
+        pre.addClass('prettyprint  linenums');
+      });
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "吴恩达机器学习——梯度下降法&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+      MathJax.Hub.Register.StartupHook("End Jax",function () {
+        var BROWSER = MathJax.Hub.Browser;
+        var jax = "HTML-CSS";
+        if (BROWSER.isMSIE && BROWSER.hasMathPlayer) jax = "NativeMML";
+        return MathJax.Hub.setRenderer(jax);
+      });
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script  src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
+
+
+
+  <script>(function (i, s, o, g, r, a, m) {
+      i['DaoVoiceObject'] = r;
+      i[r] = i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      a.charset = 'utf-8';
+      m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', ('https:' === document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/1f64a5e9.js", 'daovoice');
+    daovoice('init', {
+      app_id: "1f64a5e9",
+    });
+    daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

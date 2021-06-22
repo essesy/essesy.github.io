@@ -23,7 +23,7 @@
   <meta name="description" content="tabris的遥远星系">
   <meta name="author" content="Tabris Trees Severus">
   <meta name="keywords" content="Python,Machine Learning,物理,数学,地球科学,哲学,生活">
-  <title>标签 - 银海里泛摘天星</title>
+  <title>银海里泛摘天星</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
@@ -48,7 +48,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -226,7 +226,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('https://trees-1301133429.cos.ap-nanjing.myqcloud.com/blogweb/%E6%A0%87%E7%AD%BE.jpg') no-repeat center center;
+         style="background: url('https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/19s_by_wlop-dbsw09i.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -239,6 +239,10 @@
           </div>
 
           
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
         </div>
       </div>
     </div>
@@ -248,16 +252,560 @@
     
       <div class="container nopadding-md">
         <div class="py-5" id="board"
-          >
+          style=margin-top:0>
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="text-center tagcloud">
-  <a href="/tags/GMS/" style="font-size: 30px; color: #337ab7">GMS</a> <a href="/tags/Latex/" style="font-size: 15px; color: #bbe">Latex</a> <a href="/tags/hexo/" style="font-size: 15px; color: #bbe">hexo</a> <a href="/tags/web%E6%8A%80%E6%9C%AF/" style="font-size: 15px; color: #bbe">web技术</a> <a href="/tags/%E5%8A%A8%E6%BC%AB/" style="font-size: 15px; color: #bbe">动漫</a> <a href="/tags/%E5%9C%B0%E4%B8%8B%E6%B0%B4/" style="font-size: 15px; color: #bbe">地下水</a> <a href="/tags/%E5%9C%B0%E4%B8%8B%E6%B0%B4%E6%BA%B6%E8%B4%A8%E8%BF%90%E7%A7%BB%E6%A8%A1%E5%9E%8B/" style="font-size: 15px; color: #bbe">地下水溶质运移模型</a> <a href="/tags/%E5%9C%B0%E7%BB%9F%E8%AE%A1/" style="font-size: 22.5px; color: #779bd3">地统计</a> <a href="/tags/%E5%AE%AB%E5%B4%8E%E9%AA%8F/" style="font-size: 15px; color: #bbe">宫崎骏</a> <a href="/tags/%E5%B0%8F%E8%AF%B4/" style="font-size: 15px; color: #bbe">小说</a> <a href="/tags/%E5%BB%BA%E7%AB%99%E4%B9%8B%E5%A7%8B/" style="font-size: 15px; color: #bbe">建站之始</a> <a href="/tags/%E6%95%B0%E5%80%BC%E6%A8%A1%E6%8B%9F/" style="font-size: 15px; color: #bbe">数值模拟</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 15px; color: #bbe">机器学习</a> <a href="/tags/%E7%AB%A5%E8%AF%9D/" style="font-size: 15px; color: #bbe">童话</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px; color: #bbe">算法</a> <a href="/tags/%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84/" style="font-size: 15px; color: #bbe">自己写的</a> <a href="/tags/%E8%87%AA%E6%88%91/" style="font-size: 15px; color: #bbe">自我</a> <a href="/tags/%E8%AE%BA%E6%96%87%E6%8E%92%E7%89%88/" style="font-size: 15px; color: #bbe">论文排版</a> <a href="/tags/%E8%BD%AC%E7%A7%BB%E6%A6%82%E7%8E%87/" style="font-size: 15px; color: #bbe">转移概率</a>
+
+  <div class="row mx-auto index-card">
+    
+
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2021/05/19/fangfamiaoshu-of-T-PROGS/">Description of Approaches in T-PROGS</a>
+      
+
+      <a href="/2021/05/19/fangfamiaoshu-of-T-PROGS/" class="index-excerpt">
+        
+        
+          
+        
+        <div>
+            在T-PROGS中提供了五种方法方便我们构建马尔科夫链的转移概率矩阵，这五种方法各自适用于不同的情况，并且在操作上有着比较大的区别，现在通过对T-PROGS操作手册的翻译来大致介绍一下每一种方法的情况。测试
+          
+
+T-PROGS中各种方法的具体描述
+转移率方法所谓转移率就是计算连续转移概率矩阵的方程所提到的转移率矩阵$R_\phi$的输入元素。转移率可以</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2021-05-19
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%9F%A5%E8%AF%86/">知识</a>
+            
+              <a href="/categories/%E7%9F%A5%E8%AF%86/%E8%BD%AF%E4%BB%B6%E6%93%8D%E4%BD%9C/">软件操作</a>
+            
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GMS/">GMS</a>
+            
+              <a href="/tags/%E5%9C%B0%E7%BB%9F%E8%AE%A1/">地统计</a>
+            
+              <a href="/tags/%E8%BD%AC%E7%A7%BB%E6%A6%82%E7%8E%87/">转移概率</a>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/02/06/gmssoftware/" target="_self">
+          <img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/16213678437069085683738921793155.jpg" alt="地下水数值模拟软件获取以及相关教程">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2021/02/06/gmssoftware/">地下水数值模拟软件获取以及相关教程</a>
+      
+
+      <a href="/2021/02/06/gmssoftware/" class="index-excerpt">
+        
+        
+          
+        
+        <div>
+由于毕业论文做T-PROGS与MODFLOW的结合来模拟地下水水流运动的研究，需要学习地下水模拟相关方面的的软件。在这个过程中也走不少的弯路，经过一番折腾，终于在网上找到了一些非常好的入门资料。为了方便之后的有需要的人(估计只有我这样的菜鸡才会需要了┭┮﹏┭┮) ，我把我能找的所有资料罗列出来，以便查阅！</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2021-02-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+            
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GMS/">GMS</a>
+            
+              <a href="/tags/%E5%9C%B0%E4%B8%8B%E6%B0%B4/">地下水</a>
+            
+              <a href="/tags/%E6%95%B0%E5%80%BC%E6%A8%A1%E6%8B%9F/">数值模拟</a>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/01/10/T-PROGS/" target="_self">
+          <img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/20210110170339.png" alt="T-PROGS">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2021/01/10/T-PROGS/">T-PROGS</a>
+      
+
+      <a href="/2021/01/10/T-PROGS/" class="index-excerpt">
+        
+        
+          
+        
+        <div>关于T-PROGS的简单介绍T-PROGS是一个可以模拟地质岩性在三维空间中的随机分布的成熟软件，它原本是基于Fortran语言的开源软件包，现在的地下水模拟软件GMS软件系统中已经包含了该模块，可以直接在GMS中直接使用。本文的目的在于记录该软件模块的使用学习和过程记录。
+为什么要使用T-PROGS在地下水数值模拟的过程中，由于地下水系统属于巨复杂系统，将其复杂的运移过程简单的用一个微分方程的计</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2021-01-10
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%9F%A5%E8%AF%86/">知识</a>
+            
+              <a href="/categories/%E7%9F%A5%E8%AF%86/%E8%BD%AF%E4%BB%B6%E6%93%8D%E4%BD%9C/">软件操作</a>
+            
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GMS/">GMS</a>
+            
+              <a href="/tags/%E5%9C%B0%E4%B8%8B%E6%B0%B4%E6%BA%B6%E8%B4%A8%E8%BF%90%E7%A7%BB%E6%A8%A1%E5%9E%8B/">地下水溶质运移模型</a>
+            
+              <a href="/tags/%E5%9C%B0%E7%BB%9F%E8%AE%A1/">地统计</a>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/08/28/texstudy/" target="_self">
+          <img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/20200828160435.png" alt="Latex 论文排版相关学习">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/08/28/texstudy/">Latex 论文排版相关学习</a>
+      
+
+      <a href="/2020/08/28/texstudy/" class="index-excerpt">
+        
+        
+          
+        
+        <div>1. 一点点关于Latex的介绍
+Latex是一款排版软件，诸如教材、报纸、书信等纸质印刷相关的排版都是可以做的。一般人使用Latex最多的地方是论文的写作，特别是涉及到大量公式的数学物理方面的科技论文，这方面目前有很多网上流行的模板，我们只需要在了解简单的Latex基础操作的基础上带入模板就好，所以还是非常方便的。
+
+有很多 Geeks 或者 LaTeX’s Fanatical Fans 过分地</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-08-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Latex/">Latex</a>
+            
+              <a href="/tags/%E8%AE%BA%E6%96%87%E6%8E%92%E7%89%88/">论文排版</a>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/07/14/gqj/" target="_self">
+          <img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/宫崎骏合集.png" alt="宫崎骏电影合集(持续更新中......)">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/07/14/gqj/">宫崎骏电影合集(持续更新中......)</a>
+      
+
+      <a href="/2020/07/14/gqj/" class="index-excerpt">
+        
+        
+          
+        
+        <div>充满幻想的作品中热爱的幸福
+
+             “创作一部动画也就是创造一个虚拟的世界，这个世界慰藉着那些失去勇气的、与残忍现实搏斗的灵魂。”    ——宫崎骏
+          
+
+
+在日本动漫界无数动画创作者中，有很多优秀的，带有自己强烈的个人色彩的导演，比如庵野秀明、汤浅政明、久米田康治以及新房昭之等等。他们有的作品画风诡异，内涵深刻，有的人作品明嘲暗讽，针砭时政，有的人被称为“爱</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-07-14
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%85%B4%E8%B6%A3/">兴趣</a>
+            
+              <a href="/categories/%E5%85%B4%E8%B6%A3/%E5%8A%A8%E6%BC%AB/">动漫</a>
+            
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8A%A8%E6%BC%AB/">动漫</a>
+            
+              <a href="/tags/%E7%AB%A5%E8%AF%9D/">童话</a>
+            
+              <a href="/tags/%E5%AE%AB%E5%B4%8E%E9%AA%8F/">宫崎骏</a>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/05/14/hexo-fluid%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E4%BA%8C%E7%BA%A7%E5%AF%BC%E8%88%AA/" target="_self">
+          <img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/6418A1E7501871AF561B89A22AB13D3F.png" alt="hexo+fluid主题添加二级导航">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/05/14/hexo-fluid%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E4%BA%8C%E7%BA%A7%E5%AF%BC%E8%88%AA/">hexo+fluid主题添加二级导航</a>
+      
+
+      <a href="/2020/05/14/hexo-fluid%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E4%BA%8C%E7%BA%A7%E5%AF%BC%E8%88%AA/" class="index-excerpt">
+        
+        
+          
+        
+        <div>
+
+
+
+            使用hexo博客的fluid主题已经有一段时间了，因为打算写的内容很杂，所从很早开始就想要做一个二级导航出来，这段时间一直在折腾这个东西！前几天给网站加上了豆瓣的📕书评和🎦电影栏目，发现这样要是以后再加点什么东西导航栏就放不下了。所以痛定思痛决定开始弄二级导航（鬼知道我为了做这个东西连即将要到来的考试和难到爆炸的课程设计都不管了）
+          
+
+
+
+h</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-05-14
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/hexo/">hexo</a>
+            
+              <a href="/tags/web%E6%8A%80%E6%9C%AF/">web技术</a>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/me/" target="_self">
+          <img src="https://dingyue.nosdn.127.net/vQo64yBQ4vuUWQ8tLfOdBfU7QOOYoQ8vOPXwXbDFYMezS1526261046335transferflag.png" alt="something I won&#39;t talk at almost time">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/me/">something I won&#39;t talk at almost time</a>
+      
+
+      <a href="/2020/04/28/me/" class="index-excerpt">
+        
+        
+          
+        
+        <div>
+
 </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%80%9D%E8%80%83/">思考</a>
+            
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%87%AA%E6%88%91/">自我</a>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/14/%E6%94%BE%E9%80%90%E8%80%85/" target="_self">
+          <img src="https://image.pearvideo.com/cont/20190917/11956977-103331-1.png" alt="放逐者">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/14/%E6%94%BE%E9%80%90%E8%80%85/">放逐者</a>
+      
+
+      <a href="/2020/04/14/%E6%94%BE%E9%80%90%E8%80%85/" class="index-excerpt">
+        
+        
+          
+        
+        <div>
+            无垠的宇宙仿佛一块巨大的黑色天鹅绒，闪烁的群星变作天鹅绒上美丽的宝石，熠熠生辉的黑暗间一道明亮的轨迹插入！一艘“放逐者”号的小型探索式宇宙飞船在宇宙中已经航行了十年零四个月！
+          
+
+
+“你觉得真的有神存在吗？”
+ “这话是什么意思？”
+ “我最近老是觉得有种被人监视的感觉，可是又找不出来到底是谁在监视！我有点害怕！”
+ “你怕是最近忙晕了吧，脑子出问题了</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-14
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+            
+              <a href="/categories/%E7%94%9F%E6%B4%BB/%E5%B0%8F%E8%AF%B4/">小说</a>
+            
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%B0%8F%E8%AF%B4/">小说</a>
+            
+              <a href="/tags/%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84/">自己写的</a>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/02/04/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A021/">吴恩达机器学习——梯度下降法</a>
+      
+
+      <a href="/2020/02/04/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A021/" class="index-excerpt">
+        
+        
+          
+        
+        <div>太惨了，因为七牛云的域名关系，这个内容里面的图片暂时无法访问了，现在有没有时间去弄这些东西，这能暂时搁置，后面有时间的话再把那些图片找回来，目前的图片已经转移到腾讯云上来了，后面应该是都可以访问的！！！
+
+
+之前老师让我们去看机器学习的内容,找到了网上普遍推荐的吴恩达老师的机器学习视频,在Coursrea上看了一点点,后面因为网络问题(大家都知道,大天朝的高墙永远耸立)放弃扔那儿了,最近几天新冠病</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-02-04
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+            
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/01/15/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">千山万水的第一步</a>
+      
+
+      <a href="/2020/01/15/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="index-excerpt">
+        
+        
+          
+        
+        <div>网站建成开心,我的个人网站终于建立地差不多了!!!
+这个东西实在是太难了</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-01-15
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+            
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%BB%BA%E7%AB%99%E4%B9%8B%E5%A7%8B/">建站之始</a>
+            
+          </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+
 
               </div>
             </div>
@@ -474,7 +1022,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "打字机内容是什么鬼？&nbsp;",
+        "灵槎准拟泛银河，剩摘天星几个&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
