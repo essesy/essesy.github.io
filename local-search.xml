@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>对高等数学最精简的整理(自己考研最后期间用的)</title>
+    <link href="/2021/06/26/last-remenber/"/>
+    <url>/2021/06/26/last-remenber/</url>
+    
+    <content type="html"><![CDATA[<p>博客网站建了快两年了,干货少得可怜(主要还是因为自己太菜了),想着把自己考研时候准备的复习总结的pdf放上来吧(<p class=heimu>自我感觉里面关于三重积分-体积分-线积分-面积分等的整理还是蛮不错的!</p>).同时也算是对网站新加的PDF预览功能做一个测试吧,看看能不能用.</p><div class="row">    <embed src="source\_posts\pdf\last-remenber.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>笔记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>高等数学</tag>
+      
+      <tag>笔记</tag>
+      
+      <tag>测试</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Description of Approaches in T-PROGS</title>
     <link href="/2021/05/19/fangfamiaoshu-of-T-PROGS/"/>
     <url>/2021/05/19/fangfamiaoshu-of-T-PROGS/</url>
