@@ -14,7 +14,7 @@
 
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>学习 - 笔记 - 数学</category>
       </categories>
       <tags>
         <tag>高等数学</tag>
@@ -155,8 +155,7 @@ r_{j k, z}^{(S \max )}=\frac{f_{j k, z}^{(S \max )}}{\bar{L}_{j, z} \sum_{k \neq
 <p>最大熵的概念在解释已存在的马尔科夫链模型的并置趋势时是非常有用的。举个例子，你可以通过比例和平均长度建立一个已存在的模型，比如说（11），然后生成一个马尔科夫链，它有着最大程度的无序的并置趋势。再与转移概率方法进行比较，从而解释地层是否展现出了一定程度的有序并置趋势。在这过程中必须要给定全部类别的平均长度，包括背景类别。</p>
 ]]></content>
       <categories>
-        <category>知识</category>
-        <category>软件操作</category>
+        <category>学习 - 笔记 - 地下水数值模拟</category>
       </categories>
       <tags>
         <tag>GMS</tag>
@@ -187,7 +186,7 @@ r_{j k, z}^{(S \max )}=\frac{f_{j k, z}^{(S \max )}}{\bar{L}_{j, z} \sum_{k \neq
 <h1 id="总结一下嘛"><a href="#总结一下嘛" class="headerlink" title="总结一下嘛"></a>总结一下嘛</h1><p>感觉写了一千多字<div class="heimu">可能还没有😂</div>的废话……下次一定整点有用的！<br><img src="http://image.tabirstrees.top/images/2021/02/06/E77C06B943FAD6398EAA3097BE3B80C1.jpg" srcset="/img/loading.gif" alt="一张图而已，没什么好看的"></p>
 ]]></content>
       <categories>
-        <category>软件</category>
+        <category>资源 - 软件 - 地下水数值模拟</category>
       </categories>
       <tags>
         <tag>GMS</tag>
@@ -288,8 +287,7 @@ t_{i j}\left(x-x_{N}\right) \\
           </div>
 ]]></content>
       <categories>
-        <category>知识</category>
-        <category>软件操作</category>
+        <category>学习 - 笔记 - 地下水数值模拟</category>
       </categories>
       <tags>
         <tag>GMS</tag>
@@ -436,7 +434,7 @@ Mac OS &amp; MacTeX &amp; TeXShop \\
 <p><img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/1598496066545.jpeg" srcset="/img/loading.gif" alt="1598496066545"></p>
 ]]></content>
       <categories>
-        <category>技术</category>
+        <category>学习 - 笔记 - LaTex</category>
       </categories>
       <tags>
         <tag>Latex</tag>
@@ -480,8 +478,7 @@ Mac OS &amp; MacTeX &amp; TeXShop \\
             <p><a class="btn" href="https://zfile.tabirstrees.top/#/3/main/%E7%94%B5%E5%BD%B1/%E5%AE%AB%E5%B4%8E%E9%AA%8F%E5%90%88%E9%9B%86/%E5%80%9F%E4%B8%9C%E8%A5%BF%E7%9A%84%E5%B0%8F%E4%BA%BA%E8%89%BE%E8%8E%89%E7%BC%87" target="_blank" rel="noopener"  title="点击我去往放电影的地方！">借东西的小人阿埃丽缇</a> <a class="btn" href="https://zfile.tabirstrees.top/#/3/main/%E7%94%B5%E5%BD%B1/%E5%AE%AB%E5%B4%8E%E9%AA%8F%E5%90%88%E9%9B%86/%E5%A4%A9%E7%A9%BA%E4%B9%8B%E5%9F%8E" target="_blank" rel="noopener"  title="点击我去往放电影的地方">天空之城</a> <a class="btn" href="https://zfile.tabirstrees.top/#/3/main/%E7%94%B5%E5%BD%B1/%E5%AE%AB%E5%B4%8E%E9%AA%8F%E5%90%88%E9%9B%86/%E6%82%AC%E5%B4%96%E4%B8%8A%E7%9A%84%E9%87%91%E9%B1%BC%E5%A7%AC" target="_blank" rel="noopener"  title="点击我去往放电影的地方">悬崖上的金鱼姬</a> <a class="btn" href="https://zfile.tabirstrees.top/#/3/main/%E7%94%B5%E5%BD%B1/%E5%AE%AB%E5%B4%8E%E9%AA%8F%E5%90%88%E9%9B%86/%E4%BE%A7%E8%80%B3%E5%80%BE%E5%90%AC" target="_blank" rel="noopener"  title="点击我去往放电影的地方">侧耳倾听</a></p>
           </div>]]></content>
       <categories>
-        <category>兴趣</category>
-        <category>动漫</category>
+        <category>生活 - 动漫</category>
       </categories>
       <tags>
         <tag>动漫</tag>
@@ -613,7 +610,7 @@ li.nav-item {
           </div></p>
 ]]></content>
       <categories>
-        <category>技术</category>
+        <category>学习 - 笔记</category>
       </categories>
       <tags>
         <tag>hexo</tag>
@@ -733,7 +730,9 @@ li.nav-item {
 <p>另外,为了更好的学习,我把网易云课堂上吴恩达老师视频的链接放到这里(因为它比较系统,还有文档可以下载!)<br><a href="https://study.163.com/course/introduction/1004570029.htm" target="_blank" rel="noopener">快点我去网易云课堂学习吧</a></p>
 ]]></content>
       <categories>
+        <category>学习</category>
         <category>笔记</category>
+        <category>机器学习</category>
       </categories>
       <tags>
         <tag>机器学习</tag>

@@ -13,7 +13,7 @@
     
     <categories>
       
-      <category>笔记</category>
+      <category>学习 - 笔记 - 数学</category>
       
     </categories>
     
@@ -42,9 +42,7 @@
     
     <categories>
       
-      <category>知识</category>
-      
-      <category>软件操作</category>
+      <category>学习 - 笔记 - 地下水数值模拟</category>
       
     </categories>
     
@@ -73,7 +71,7 @@
     
     <categories>
       
-      <category>软件</category>
+      <category>资源 - 软件 - 地下水数值模拟</category>
       
     </categories>
     
@@ -102,9 +100,7 @@
     
     <categories>
       
-      <category>知识</category>
-      
-      <category>软件操作</category>
+      <category>学习 - 笔记 - 地下水数值模拟</category>
       
     </categories>
     
@@ -133,7 +129,7 @@
     
     <categories>
       
-      <category>技术</category>
+      <category>学习 - 笔记 - LaTex</category>
       
     </categories>
     
@@ -160,9 +156,7 @@
     
     <categories>
       
-      <category>兴趣</category>
-      
-      <category>动漫</category>
+      <category>生活 - 动漫</category>
       
     </categories>
     
@@ -191,7 +185,7 @@
     
     <categories>
       
-      <category>技术</category>
+      <category>学习 - 笔记</category>
       
     </categories>
     
@@ -272,7 +266,11 @@
     
     <categories>
       
+      <category>学习</category>
+      
       <category>笔记</category>
+      
+      <category>机器学习</category>
       
     </categories>
     
