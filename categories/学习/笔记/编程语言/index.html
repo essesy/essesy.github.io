@@ -23,7 +23,7 @@
   <meta name="description" content="tabris的遥远星系">
   <meta name="author" content="Tabris Trees Severus">
   <meta name="keywords" content="Python,Machine Learning,物理,数学,地球科学,哲学,生活">
-  <title>Fortran语言学习——流程控制与逻辑运算 - 银海里泛摘天星</title>
+  <title>分类 - 编程语言 - 银海里泛摘天星</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
@@ -48,7 +48,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -226,7 +226,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('https://trees-1301133429.cos.ap-nanjing.myqcloud.com/blogweb/post.jpg') no-repeat center center;
+         style="background: url('https://trees-1301133429.cos.ap-nanjing.myqcloud.com/blogweb/%E8%A1%97%E5%8F%A3.jpeg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -235,38 +235,6 @@
               
             </span>
 
-            
-              
-                <div class="mt-3 post-meta">
-                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2021-07-07 22:20">
-                    星期三, 七月 7日 2021, 10:20 晚上
-                  </time>
-                </div>
-              
-
-              <div class="mt-1">
-                
-                  
-                  <span class="post-meta mr-2">
-                    <i class="iconfont icon-chart"></i>
-                    一共1.9k 字
-                  </span>
-                
-
-                
-                  
-                  <span class="post-meta mr-2">
-                      <i class="iconfont icon-clock-fill"></i>
-                    
-                    大概需要
-                    21
-                     分钟
-                  </span>
-                
-
-                
-              </div>
             
           </div>
 
@@ -278,307 +246,37 @@
 
   <main>
     
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+<!--  <p class="h4">共计 1 篇文章</p>-->
+  <hr>
+  
+    
       
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
-            
-              <p class="note note-warning">
-                更新于：星期三, 七月 7日 2021, 11:56 晚上
-              </p>
-            
-            <article class="markdown-body">
-              <p><img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/20210707235432.png" srcset="/img/loading.gif" alt="Fortran"></p>
-<div class="note note-primary">
-            <p>我们假设大家都有一定的编程基础，至少知道编程过程中流程控制是什么意思（<span class="heimu">其实也没啥意思，就是条件语句之类的</span>）。另外把实际的例子的代码省去，这样更加精简的作为字典或者文档查询更加方便。</p>
-          </div>
-<h1 id="1-IF语句"><a href="#1-IF语句" class="headerlink" title="1.IF语句"></a>1.IF语句</h1><p>首先第一个我们需要接触的就是if条件语句，在Fortran语言中一般这样写：</p>
-<pre><code class="lang-Fortran">if (逻辑判断式) then
-    ...
-    ...
-    ...
-end if
-</code></pre>
-<p>举个书上的例子，我们写一个速度超过一百就会发出警报的简单程序：</p>
-<pre><code class="lang-Fortran">if(speed&gt;100)then
-    ! speed &gt; 100时才会执行下面的语句
-    write(*,*)&quot;Slow down.&quot;
-end if
-stop
-</code></pre>
-<p>注意该程序知识一部分而已，前面变量的申明还是要照样做的。另外除此之外还可以简写成如下的形式：</p>
-<pre><code class="lang-Fortran">if (speed&gt;100) write(*,*) &quot;Slow down.&quot;
-</code></pre>
-<h2 id="条件分支"><a href="#条件分支" class="headerlink" title="条件分支"></a>条件分支</h2><p>除此之外呢，我们可能还需要设置不满足条件时应该执行的语句，或者是有其他很多种情况的分支，这个时候就需要这么写：</p>
-<pre><code class="lang-Fortran">if (条件1) then ! 情况1
-    ...
-    ...
-else if (条件2) then ! 情况2
-    ...
-    ...
-else if (条件3) then ! 情况3
-    ...
-    ...
-...
-else ! 以上情况都不满足的情况
-    ...
-    ...
-end if
-</code></pre>
-<h2 id="逻辑判断符号以及集合判断符号"><a href="#逻辑判断符号以及集合判断符号" class="headerlink" title="逻辑判断符号以及集合判断符号"></a>逻辑判断符号以及集合判断符号</h2><p>另外补充以下在Fortran中表示逻辑判断以及集合判断的方式:</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">代码</th>
-<th style="text-align:center">表示含义 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"> <code>==</code></td>
-<td style="text-align:center">相等 </td>
-</tr>
-<tr>
-<td style="text-align:center"> <code>/=</code></td>
-<td style="text-align:center">不等于 </td>
-</tr>
-<tr>
-<td style="text-align:center"> <code>&gt;</code></td>
-<td style="text-align:center">大于 </td>
-</tr>
-<tr>
-<td style="text-align:center"> <code>&gt;=</code></td>
-<td style="text-align:center">大于等于 </td>
-</tr>
-<tr>
-<td style="text-align:center"> <code>&lt;</code></td>
-<td style="text-align:center">小于 </td>
-</tr>
-<tr>
-<td style="text-align:center"> <code>&lt;=</code></td>
-<td style="text-align:center">小于等于 </td>
-</tr>
-<tr>
-<td style="text-align:center"> <code>.and.</code></td>
-<td style="text-align:center">交集 </td>
-</tr>
-<tr>
-<td style="text-align:center"> <code>.or.</code></td>
-<td style="text-align:center">并集 </td>
-</tr>
-<tr>
-<td style="text-align:center"> <code>.not.</code></td>
-<td style="text-align:center">不成立 </td>
-</tr>
-<tr>
-<td style="text-align:center"> <code>.eqv.</code></td>
-<td style="text-align:center">逻辑运算相等 </td>
-</tr>
-<tr>
-<td style="text-align:center"> <code>.neqv.</code></td>
-<td style="text-align:center">逻辑运算不相等 </td>
-</tr>
-</tbody>
-</table>
+      <p class="h5">2021</p>
+    
+    <a href="/2021/07/07/fortran-logic-compute/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">Fortran语言学习——流程控制与逻辑运算</span>
+      <span style="float: right;">07-07</span>
+    </a>
+  
 </div>
-<p> 以上，逻辑判断的运算等级高于集合运算的等级，同时出现时先执行逻辑判断（大于小于等于之类的）的语句。</p>
-<h2 id="嵌套使用"><a href="#嵌套使用" class="headerlink" title="嵌套使用"></a>嵌套使用</h2><p>当存在if语句的嵌套使用时，可以这样：</p>
-<pre><code class="lang-fortran">if (...) then ! 第一层
-    if (...) then ! 第二层
-        if (...) then ! 第三层主条件
-            ...
-        else if (...) then ! 第三层次条件
-            ...
-        else ! 第三层其余情况
-            ...
-        end if ! 第三层结束
-    end if ! 第二层结束
-end if ! 第一层结束
-</code></pre>
-<h1 id="2-浮点数以及字符的逻辑运算"><a href="#2-浮点数以及字符的逻辑运算" class="headerlink" title="2.浮点数以及字符的逻辑运算"></a>2.浮点数以及字符的逻辑运算</h1><h2 id="浮点数的逻辑判断"><a href="#浮点数的逻辑判断" class="headerlink" title="浮点数的逻辑判断"></a>浮点数的逻辑判断</h2><p>我们知道，由于计算机运行方式以及内存情况的限制，当我们进行浮点数之间的计算时通常是带有误差的，比如：$a=\sqrt{b}^2-b = 0$在实际的运算过程中可能会出现$a$不等于0的情况，这是因为计算机在计算浮点数时的有效位数的问题造成的。举个例子，$\sqrt{3}$在计算时只能采用有限的位数来保存，这个时候就会出现误差，再将这个存在误差的数字作幂次运算，等到的结果必然不会是3，而是一个接近3的数字。</p>
-<p>如果我们需要对类似这样的情况作出判断，（判断$\sqrt{b}^2-b$是否等于0），就需要对我们的结果预留出一些误差的空间。这样，我们可以把上面的过程写成如下的形式：</p>
-<pre><code class="lang-fortran">program example
-implicit none
-    real :: b = 4.0
-    real :: a
-    real, parameter :: e = 0.0001 ! 表示误差的范围
-    a = sqrt(b)**2-b
 
-    if (abs(a-0.0) &lt;= e) then
-        write(*,*) &quot;a等于0！&quot;
-    else
-        write(*,*) &quot;a不等于0！&quot;
-    end if
 
-    stop
-end
-</code></pre>
-<h2 id="字符的逻辑判断"><a href="#字符的逻辑判断" class="headerlink" title="字符的逻辑判断"></a>字符的逻辑判断</h2><p>和Python一样，字符甚至字符串之间也是可以用来做逻辑判断的，这实际上使用的字符转换成ASCII码之后的数值进行的逻辑判断。比如说判断<code>&#39;A&#39; &lt; &#39;a&#39;</code>为<code>true</code>是因为a的ASCII码为97，A的ASCII码为65。</p>
-<p>需要注意的是，当字符串作比较时，实际上比较的是第一个字符的ASCII码，如果第一个字符相同就比较第二个字符，依此类推。</p>
-<h1 id="SELECT-CASE语句"><a href="#SELECT-CASE语句" class="headerlink" title="SELECT CASE语句"></a>SELECT CASE语句</h1><p>实际上，在我们需要使用多重判断时，有一种可以代替<code>IF ... ELSE IF ...</code>的语句，那就是SELECT　CASE语句，下面是该语句的用法：</p>
-<pre><code class="lang-Fortran">select case(变量) !　这里的变量是指需要进行判断的变量
-case (数值1)
-...... ! 当变量的数值等于数值1时，就执行该语句
-case (数值2)
-...... ! 变量等于数值2时，执行该语句
-...
-case default
-...... ! 默认情况下，即变量不等于任何数值时，执行该语句
-end select
-</code></pre>
-<p><code>slecet default</code>模块不是必要的，在<code>case</code>里面的数值设置可以设置成范围，即类似<code>2：5</code>表示2~5的数值范围，同时也支持类似<code>1，3，5</code>表示变量值等于三者中的任何一个时都会执行其所属的语句。</p>
-<p>值得注意的是，使用<code>select case</code>语句会有一些限制：</p>
-<ol>
-<li>只能使用整数、字符、以及逻辑变量类型的变量，对于浮点数和复数就只能用<code>if ... else if</code>的结构；</li>
-<li>每一个case中所使用的数值必须是固定的常量，而不能是变量。</li>
-</ol>
-<h1 id="其他控制流程"><a href="#其他控制流程" class="headerlink" title="其他控制流程"></a>其他控制流程</h1><h2 id="GOTO命令"><a href="#GOTO命令" class="headerlink" title="GOTO命令"></a>GOTO命令</h2><p>实际上，GOTO语法是Fortran 77时代；留下来的“旧时代”的语法，一般不建议使用，因为它会破坏代码的结构，导致代码的阅读变得比较困难，但是某些上世纪写的程序中还会留有这样的结构，所以仍然需要了解。</p>
-<p>在Fortran语言中，可以给每一行代码赋予一个特定的编号，利用GOTO命令就可以提供给程序员一个可以使程序任意跳跃到所赋值编号的那一行程序所在位置来执行的能力。</p>
-<pre><code class="lang-Fortran">      PROGRAM ex0514
-      IMPLICIT NONE
-      REAL height ! 记录身高
-      REAL weight ! 记录体重
 
-      WRITE(*,*) &quot;height:&quot;
-      READ (*,*)    height ! 读入身高
-      WRITE(*,*) &quot;weight:&quot;
-      READ (*,*)    weight ! 读入体重
-
-      IF ( weight &gt; height-100 ) GOTO 200
-      ! 上面不成立，没有跳到200才会执行这里
-100   WRITE(*,*) &quot;Under control.&quot;
-      GOTO 300 ! 下一行不能执行所以要跳到300 .
-200      WRITE(*,*) &quot;Too fat!&quot;
-
-300   STOP
-END
-</code></pre>
-<p>如果GOTO结构可以用得比较巧妙，这样的话可以利用<code>IF</code>+<code>GOTO</code>结构来写一个类似循环的过程，或者利用类似<code>GOTO(10,20,30) a</code>（其中a表示变量，用以指代前面括号中的列表的序列切片，即1表示10，2表示20，3表示30）的结构进行有选择的跳转。<span class = "heimu">看不懂也没关系，反正就是不建议使用就对了</span></p>
-<div class="note note-danger">
-            <p>最后再强调一遍，虽然GOTO结构看起来很强大，但是并不建议使用，因为这会使得代码的结构混乱，不便于阅读和维护。</p>
-          </div>
-<h2 id="PAUSE-CONTINUE-STOP"><a href="#PAUSE-CONTINUE-STOP" class="headerlink" title="PAUSE, CONTINUE, STOP"></a>PAUSE, CONTINUE, STOP</h2><p>PAUSE 暂停，表示程序执行到该代码之后会暂停，知道用户按下Enter键之后程序才会继续执行。可以应用到程序需要做很多页的输出时，在每一页设置暂停，直到用户看完每一页的内容之后再按Enter键进行翻页。</p>
-<p>CONTINUE 继续，没什么用，Fortran 90之后就不怎么使用了，基本上可以不管，因为它没有什么实际意义，只是为了方便阅读而已。</p>
-<p>STOP 停止，很明显，执行完该代码程序就停止了，可以用来作为程序得到不合理的输入时将程序终止。</p>
-<hr>
-<p>研究生通知书到了，趁这里没人，独自高兴一波hahaha！<br><img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/1625667151163.jpg" srcset="/img/loading.gif" alt="1625667151163"></p>
-
-            </article>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-                    
-                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/%E7%AC%94%E8%AE%B0/">笔记</a>
-                    
-                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/%E7%AC%94%E8%AE%B0/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
-                    
-                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0/%E7%AC%94%E8%AE%B0/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Fortran/">Fortran</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Fortran/">Fortran</a>
-                    
-                  </div>
-                
               </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
-                    
-                    
-                  </div>
-                  <div class="post-next col-6">
-                    
-                    
-                      <a href="/2021/06/26/last-remenber/">
-                        <span class="hidden-mobile">对高等数学最精简的整理(自己考研最后期间用的)</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </div>
-                </div>
-              
             </div>
-
-            
-              <!-- Comments -->
-              <div class="comments" id="comments">
-                
-                
-  <div id="vcomments" style="margin: 0 auto;"></div>
-  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script defer src="//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
-  <script>
-    var notify = 'false' == true ? true : false;
-    var verify = 'false' == true ? true : false;
-    var oldLoad = window.onload;
-    window.onload = function () {
-      new Valine({
-        el: '#vcomments',
-        notify: notify,
-        verify: verify,
-        app_id: "5SwkpbHGOJB2KgABwOdCNxyF-gzGzoHsz",
-        app_key: "fP55qHxXExV199K1jwieOiC3",
-        placeholder: "神说要有光，于是你来到了这里！(≧∀≦)ゞ",
-        avatar: "robohash",
-        meta: ['nick', 'mail', 'link'],
-        pageSize: "5"
-      });
-      oldLoad && oldLoad();
-    };
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
-
-
-              </div>
-            
           </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-  <div class="col-lg-7 mx-auto nopadding-md">
-    <div class="container custom post-content mx-auto">
-      <img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/20200509212356.jpg" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
-    </div>
-  </div>
-
-
     
   </main>
 
@@ -735,34 +433,6 @@ END
 
 
 
-  
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '.post-content',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
 
 
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
@@ -810,20 +480,6 @@ END
 
 
 
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').each(function () {
-        const pre = $(this);
-        if (pre.find('code.mermaid').length > 0) {
-          return;
-        }
-        pre.addClass('prettyprint  linenums');
-      });
-      prettyPrint();
-    })
-  </script>
-
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
@@ -831,7 +487,7 @@ END
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Fortran语言学习——流程控制与逻辑运算&nbsp;",
+        "分类 - 编程语言&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -874,20 +530,6 @@ END
   </script>
 
 
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
 
 
 

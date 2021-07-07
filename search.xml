@@ -3,7 +3,8 @@
   <entry>
     <title>Fortran语言学习——流程控制与逻辑运算</title>
     <url>/2021/07/07/fortran-logic-compute/</url>
-    <content><![CDATA[<div class="note note-primary">
+    <content><![CDATA[<p><img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/20210707235432.png" srcset="/img/loading.gif" alt="Fortran"></p>
+<div class="note note-primary">
             <p>我们假设大家都有一定的编程基础，至少知道编程过程中流程控制是什么意思（<span class="heimu">其实也没啥意思，就是条件语句之类的</span>）。另外把实际的例子的代码省去，这样更加精简的作为字典或者文档查询更加方便。</p>
           </div>
 <h1 id="1-IF语句"><a href="#1-IF语句" class="headerlink" title="1.IF语句"></a>1.IF语句</h1><p>首先第一个我们需要接触的就是if条件语句，在Fortran语言中一般这样写：</p>
@@ -178,6 +179,12 @@ END
 <hr>
 <p>研究生通知书到了，趁这里没人，独自高兴一波hahaha！<br><img src="https://hexo-1301133429.cos.ap-chengdu.myqcloud.com/1625667151163.jpg" srcset="/img/loading.gif" alt="1625667151163"></p>
 ]]></content>
+      <categories>
+        <category>学习</category>
+        <category>笔记</category>
+        <category>编程语言</category>
+        <category>Fortran</category>
+      </categories>
       <tags>
         <tag>编程</tag>
         <tag>Fortran</tag>
