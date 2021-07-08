@@ -24,7 +24,7 @@ body {
 
 img-timeline {
   max-width: 100%;
-  padding: 0% !important;
+  padding: initial !important;
 }
 
 /* -------------------------------- 
