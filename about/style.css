@@ -22,9 +22,9 @@ body {
 
 
 
-img-timeline {
+img {
   max-width: 100%;
-  padding: initial !important;
+  padding: initial;
 }
 
 /* -------------------------------- 
